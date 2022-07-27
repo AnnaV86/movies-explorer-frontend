@@ -1,0 +1,32 @@
+.nav-movie__menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 16px;
+}
+
+.nav-movie__link {
+  text-decoration: none;
+  color: black;
+  margin-right: 16px;
+}
+
+.active {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.nav-movie__link_profile {
+  margin: 0;
+  width: 100px;
+  height: 32px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}

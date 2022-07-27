@@ -8,11 +8,9 @@ export const NavAuth = () => {
       <NavLink to='/signup' className='menu__link'>
         Регистрация
       </NavLink>
-      <button className='button'>
-        <NavLink to='/signin' className='menu__link'>
-          Войти
-        </NavLink>
-      </button>
+      <NavLink to='/signin' className='menu__link button'>
+        Войти
+      </NavLink>
     </nav>
   );
 };
