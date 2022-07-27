@@ -1,7 +1,15 @@
+import { useState } from 'react';
+import { Preloader } from './components/Preloader/Preloader';
+import { SearchForm } from '../SearchForm/SearchForm';
+import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
+import './Movies.css';
 export const Movies = () => {
+  const [preloaderOpen, setPreloaderOpen] = useState(false);
+
   return (
-    <>
-      <div>Movies</div>
-    </>
+    <section className='movies'>
+      <SearchForm />
+      {preloaderOpen ? <Preloader /> : <MoviesCardList />}
+    </section>
   );
 };

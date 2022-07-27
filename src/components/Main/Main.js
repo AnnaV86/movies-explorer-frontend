@@ -6,11 +6,11 @@ import { AboutMe } from './components/AboutMe/AboutMe';
 
 export const Main = () => {
   return (
-    <main className='content'>
+    <section className='content'>
       <Promo />
       <AboutProject />
       <Techs />
       <AboutMe />
-    </main>
+    </section>
   );
 };
