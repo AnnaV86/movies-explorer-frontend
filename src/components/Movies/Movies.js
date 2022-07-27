@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Preloader } from './components/Preloader/Preloader';
+import { Preloader } from '../Preloader/Preloader';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import './Movies.css';

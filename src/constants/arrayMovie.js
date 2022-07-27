@@ -1,0 +1,86 @@
+import pic from '../images/pic.jpg';
+
+export const arreyMovie = [
+  {
+    image: { pic },
+    nameRU: '33 слова о дизайне',
+    save: true,
+    _id: 1,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: false,
+    _id: 2,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: true,
+    _id: 3,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: true,
+    _id: 4,
+  },
+  {
+    image: { pic },
+    nameRU: '33 слова о дизайне',
+    save: false,
+    _id: 5,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: true,
+    _id: 6,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: true,
+    _id: 7,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: true,
+    _id: 8,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: false,
+    _id: 9,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: true,
+    _id: 10,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: true,
+    _id: 11,
+  },
+  {
+    image: { pic },
+    duration: 1.45,
+    nameRU: '33 слова о дизайне',
+    save: true,
+    _id: 12,
+  },
+];

@@ -1,4 +1,4 @@
 import './MoviesCard.css';
-export const MoviesCard = () => {
+export const MoviesCard = ({movie}) => {
   return <section className='movie-card'>MoviesCard</section>;
 };
