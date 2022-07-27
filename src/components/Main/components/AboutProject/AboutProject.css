@@ -1,0 +1,86 @@
+.about-project {
+  height: 608px;
+  padding: 110px 70px;
+  box-sizing: border-box;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #000;
+}
+
+.text__list {
+  padding: 0;
+  margin: 0;
+  padding-top: 70px;
+  display: flex;
+}
+
+.text__item {
+  list-style: none;
+}
+
+.text__title {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.text__paragraph {
+  margin: 0;
+  margin-top: 26px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.week__container {
+  margin-top: 110px;
+  display: flex;
+}
+
+.week__item {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.week__item_back {
+  width: 20%;
+}
+
+.week__item_front {
+  width: 80%;
+}
+
+.week__item-duration {
+  margin: 0;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.week__item-duration_one {
+  background-color: #2be080;
+}
+
+.week__item-duration_four {
+  background-color: #f2f2f2;
+}
+
+.week__title {
+  margin: 0;
+  margin-top: 14px;
+  color: #a0a0a0;
+}

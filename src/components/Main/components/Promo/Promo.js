@@ -1,10 +1,14 @@
+import { NavTab } from '../NavTab/NavTab';
+import './Promo.css';
 export const Promo = () => {
   return (
-    <section className='menu__container'>
-      <h1 className='menu__title'>
-        Учебный проект студента факультета Веб-разработки.
-      </h1>
-      <div></div>
+    <section className='promo'>
+      <div className='promo__container'>
+        <h1 className='promo__title'>
+          Учебный проект студента факультета Веб-разработки.
+        </h1>
+        <NavTab />
+      </div>
     </section>
   );
 };

@@ -1,0 +1,49 @@
+.portfolio {
+  margin-top: 100px;
+}
+
+.portfolio__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #a0a0a0;
+}
+
+.website__list {
+  margin: 0;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.website__item {
+  list-style: none;
+  padding-top: 20px;
+  padding-bottom: 19px;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.website__item:last-child {
+  border: none;
+}
+.website__item-text {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  color: black;
+}
+
+.website__item-link {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 60px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
