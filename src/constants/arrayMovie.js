@@ -92,7 +92,7 @@ export const arreyMovie = [
       'https://sun9-west.userapi.com/sun9-53/s/v1/if1/Q9zFaSrvGv4KPRjHEWjtPkXXNkL_W3qHnZA-m4ohgeRmXU-ug4M4ZTumPzEVdklV0GufctJH.jpg?size=1548x2064&quality=96&type=album',
     duration: 51,
     nameRU: '33 слова о дизайне',
-    save: true,
+    save: false,
     _id: 12,
   },
 ];

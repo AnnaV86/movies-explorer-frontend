@@ -1,7 +1,14 @@
+import { Form } from '../Form/Form';
+
 export const Register = () => {
   return (
     <>
-      <div>Register</div>
+      <Form
+        title={'Добро пожаловать!'}
+        type={'signup'}
+        button={'Зарегистрироваться'}
+        text={`Уже зарегистрированы? `}
+      />
     </>
   );
 };

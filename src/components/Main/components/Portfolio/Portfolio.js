@@ -8,6 +8,8 @@ export const Portfolio = () => {
           <p className='website__item-text'>Статичный сайт</p>
           <a
             className='website__item-link'
+            target={'_blank'}
+            rel='noopener noreferrer'
             href='https://github.com/AnnaV86/how-to-learn'
           >
             ↗
@@ -17,6 +19,8 @@ export const Portfolio = () => {
           <p className='website__item-text'>Адаптивный сайт</p>
           <a
             className='website__item-link'
+            target={'_blank'}
+            rel='noopener noreferrer'
             href='https://github.com/AnnaV86/russian-travel'
           >
             ↗
@@ -26,6 +30,8 @@ export const Portfolio = () => {
           <p className='website__item-text'>Одностраничное приложение</p>
           <a
             className='website__item-link'
+            target={'_blank'}
+            rel='noopener noreferrer'
             href='https://github.com/AnnaV86/react-mesto-api-full'
           >
             ↗

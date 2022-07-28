@@ -11,19 +11,28 @@ export const Footer = () => {
           <li className='footer__list-item'>
             <a
               className='footer__list-link'
+              target={'_blank'}
+              rel='noopener noreferrer'
               href='https://practicum.yandex.ru/'
             >
               Яндекс.Практикум
             </a>
           </li>
           <li className='footer__list-item'>
-            <a className='footer__list-link' href='https://github.com/AnnaV86'>
+            <a
+              className='footer__list-link'
+              target={'_blank'}
+              rel='noopener noreferrer'
+              href='https://github.com/AnnaV86'
+            >
               Github
             </a>
           </li>
           <li className='footer__list-item'>
             <a
               className='footer__list-link'
+              target={'_blank'}
+              rel='noopener noreferrer'
               href='https://career.habr.com/annavidutina'
             >
               ХабрКарьера

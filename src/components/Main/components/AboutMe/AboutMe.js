@@ -23,13 +23,20 @@ export const AboutMe = () => {
             <li className='about-me__link-item'>
               <a
                 className='about-me__link'
+                target={'_blank'}
+                rel='noopener noreferrer'
                 href='https://career.habr.com/annavidutina'
               >
                 ХабрКарьера
               </a>
             </li>
             <li className='about-me__link-item'>
-              <a className='about-me__link' href='https://github.com/AnnaV86'>
+              <a
+                className='about-me__link'
+                target={'_blank'}
+                rel='noopener noreferrer'
+                href='https://github.com/AnnaV86'
+              >
                 Github
               </a>
             </li>

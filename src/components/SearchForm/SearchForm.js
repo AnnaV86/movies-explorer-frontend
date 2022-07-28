@@ -1,15 +1,15 @@
 import './SearchForm.css';
 export const SearchForm = () => {
   return (
-    <section className='search-form'>
-      <form className='form'>
+    <section className='search'>
+      <form className='search-form'>
         <div className='search-movie'>
           <input
-            className='form__input'
+            className='search-form__input'
             type='text'
             placeholder={`        Фильм`}
           />
-          <button className='form__button' type='button'></button>
+          <button className='search-form__button' type='button'></button>
         </div>
         <label className='checkbox__label'>
           <input className='checkbox' type='checkbox' value='short' />

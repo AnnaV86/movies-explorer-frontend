@@ -3,14 +3,20 @@ import { AboutProject } from './components/AboutProject/AboutProject';
 import './Main.css';
 import { Techs } from './components/Techs/Techs';
 import { AboutMe } from './components/AboutMe/AboutMe';
+import { Footer } from '../Footer/Footer';
+import { Header } from '../Header/Header';
 
 export const Main = () => {
   return (
-    <section className='content'>
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-    </section>
+    <>
+      <Header />
+      <section className='content'>
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+      </section>
+      <Footer />
+    </>
   );
 };
