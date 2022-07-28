@@ -8,6 +8,12 @@
   line-height: 16px;
 }
 
+.nav-movie__movie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .nav-movie__link {
   text-decoration: none;
   color: black;

@@ -6,9 +6,11 @@ import { arreyMovie } from '../../constants/arrayMovie';
 export const MoviesCardList = () => {
   return (
     <section className='movie-card-list'>
-      {arreyMovie.forEach((movie) => {
-        return <MoviesCard movie={movie} key={movie._id} />;
-      })}
+      <ul className='elements'>
+        {arreyMovie.map((movie) => {
+          return <MoviesCard movie={movie} key={movie._id} />;
+        })}
+      </ul>
     </section>
   );
 };

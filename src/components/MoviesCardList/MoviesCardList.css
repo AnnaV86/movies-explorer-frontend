@@ -1,0 +1,20 @@
+.movie-card-list {
+  min-height: 1274px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 70px 70px 30px;
+  box-sizing: border-box;
+}
+
+.elements {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 364px);
+  grid-template-rows: repeat(auto-fill, 274px);
+  column-gap: 24px;
+  row-gap: 30px;
+  justify-content: center;
+}
