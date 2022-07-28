@@ -9,7 +9,16 @@ export const Movies = () => {
   return (
     <section className='movies'>
       <SearchForm />
-      {preloaderOpen ? <Preloader /> : <MoviesCardList />}
+      {preloaderOpen ? (
+        <Preloader />
+      ) : (
+        <>
+          <MoviesCardList />
+          <section className='more'>
+            <button className='more__button'>Ещё</button>
+          </section>
+        </>
+      )}
     </section>
   );
 };
