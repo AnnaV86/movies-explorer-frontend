@@ -7,6 +7,7 @@ import { arreyMovie } from '../../constants/arrayMovie';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 export const SavedMovies = () => {
+    // Данный useState временный, для выполнения этапа верстка
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const saveArreyMovie = arreyMovie.filter((movie) => movie.save);
 

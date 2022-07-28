@@ -6,6 +6,7 @@ import { Profile } from './components/Profile/Profile';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import './App.css';
+import { PageNotFound } from './components/PageNotFound/PageNotFound';
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
           <Route path='/profile' element={<Profile />} />
           <Route path='/signin' element={<Login />} />
           <Route path='/signup' element={<Register />} />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </div>
     </BrowserRouter>
