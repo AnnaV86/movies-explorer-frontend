@@ -29,6 +29,7 @@
 .website__item:last-child {
   border: none;
 }
+
 .website__item-text {
   margin: 0;
   font-style: normal;
@@ -46,4 +47,8 @@
   cursor: pointer;
   text-decoration: none;
   color: black;
+}
+
+.website__item-link:hover {
+  opacity: 0.8;
 }

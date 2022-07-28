@@ -13,6 +13,10 @@
   color: black;
 }
 
+.menu__link:hover {
+  opacity: 0.8;
+}
+
 .button {
   width: 76px;
   height: 32px;

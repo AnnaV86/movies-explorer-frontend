@@ -52,6 +52,10 @@
   cursor: pointer;
 }
 
+.form__button:hover {
+  opacity: 0.8;
+}
+
 .checkbox__label {
   font-style: normal;
   font-weight: 400;
@@ -79,6 +83,14 @@
   cursor: pointer;
 }
 
+.checkbox__pseudo:hover {
+  opacity: 0.8;
+}
+
 .checkbox:checked + .checkbox__pseudo {
   background-image: url(../../images/smalltumb.svg);
+}
+
+.checkbox:checked + .checkbox__pseudo:hover {
+  opacity: 0.8;
 }

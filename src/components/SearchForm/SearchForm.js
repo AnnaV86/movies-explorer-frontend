@@ -11,13 +11,8 @@ export const SearchForm = () => {
           />
           <button className='form__button' type='button'></button>
         </div>
-        <label className='checkbox__label' for='short'>
-          <input
-            className='checkbox'
-            type='checkbox'
-            value='short'
-            id='short'
-          />
+        <label className='checkbox__label'>
+          <input className='checkbox' type='checkbox' value='short' />
           <span className='checkbox__pseudo'></span>
           Короткометражки
         </label>

@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import './MoviesCardList.css';
 import { MoviesCard } from './components/MoviesCard/MoviesCard';
-import { arreyMovie } from '../../constants/arrayMovie';
 
-export const MoviesCardList = () => {
+export const MoviesCardList = ({ arreyMovie }) => {
   return (
     <section className='movie-card-list'>
       <ul className='elements'>

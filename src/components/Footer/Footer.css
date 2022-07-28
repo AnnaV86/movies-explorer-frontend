@@ -46,6 +46,10 @@
   margin-left: 20px;
 }
 
+.footer__list-item:hover {
+  opacity: 0.8;
+}
+
 .footer__list-link {
   text-decoration: none;
   color: black;

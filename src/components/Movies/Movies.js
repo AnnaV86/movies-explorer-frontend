@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Preloader } from '../Preloader/Preloader';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
+import { arreyMovie } from '../../constants/arrayMovie';
 import './Movies.css';
 export const Movies = () => {
   const [preloaderOpen, setPreloaderOpen] = useState(false);
@@ -13,7 +14,7 @@ export const Movies = () => {
         <Preloader />
       ) : (
         <>
-          <MoviesCardList />
+          <MoviesCardList arreyMovie={arreyMovie} />
           <section className='more'>
             <button className='more__button'>Ещё</button>
           </section>

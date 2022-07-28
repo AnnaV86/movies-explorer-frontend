@@ -8,15 +8,17 @@ export const NavMovie = () => {
       <div className='nav-movie__movie'>
         <NavLink
           to='/movies'
-          className='nav-movie__link'
-          activeClassName='active'
+          className={({ isActive }) =>
+            isActive ? 'nav-movie__link active' : 'nav-movie__link'
+          }
         >
           Фильмы
         </NavLink>
         <NavLink
           to='/saved-movies'
-          className='nav-movie__link'
-          activeClassName='active'
+          className={({ isActive }) =>
+            isActive ? 'nav-movie__link active' : 'nav-movie__link'
+          }
         >
           Сохранённые фильмы
         </NavLink>
