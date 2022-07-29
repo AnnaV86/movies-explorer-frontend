@@ -1,3 +1,16 @@
+.nav-menu__menu-adapt {
+  height: 44px;
+  width: 44px;
+  background-image: url(../../../../images/menu.svg);
+  cursor: pointer;
+  display: none;
+  position: relative;
+}
+
+.nav-menu__menu-adapt:hover {
+  opacity: 0.8;
+}
+
 .nav-movie__menu {
   width: 100%;
   display: flex;
@@ -41,4 +54,18 @@
   border-radius: 20px;
   font-size: 14px;
   line-height: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-menu__menu-adapt {
+    display: block;
+  }
+
+  .nav-movie__menu {
+    display: none;
+  }
+
+  .nav-movie__link_profile {
+    display: none;
+  }
 }
