@@ -97,7 +97,19 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 1170px) {
+  .search-movie {
+    width: 78%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .search-movie {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 900px) {
   .search {
     padding: 80px 30px 109px;
   }
@@ -108,13 +120,13 @@
   }
 
   .search-movie {
-    width: 70%;
+    width: 72%;
     padding-right: 19px;
     border-right: 1px solid #cbcbcb;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 767px) {
   .search {
     border-bottom: none;
     padding: 80px 10px 10px;

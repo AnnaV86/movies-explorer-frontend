@@ -63,10 +63,16 @@
   font-size: 14px;
   line-height: 16px;
   margin: 0;
-  margin-top: 621px;
+  position: absolute;
+  bottom: 90px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   .hidden-menu {
     background: unset;
   }
@@ -85,6 +91,6 @@
   }
 
   .nav-movie__link-adapt_profile {
-    margin-top: 444px;
+    bottom: 46px;
   }
 }
