@@ -7,7 +7,7 @@ export const SearchForm = () => {
           <input
             className='search-form__input'
             type='text'
-            placeholder={`        Фильм`}
+            placeholder={`Фильм`}
           />
           <button className='search-form__button' type='button'></button>
         </div>

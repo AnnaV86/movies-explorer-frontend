@@ -41,6 +41,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 }
 
 .nav-movie__link-adapt {
@@ -61,7 +62,29 @@
   display: flex;
   font-size: 14px;
   line-height: 16px;
-  position: absolute;
   margin: 0;
-  bottom: 90px;
+  margin-top: 621px;
+}
+
+@media screen and (max-width: 320px) {
+  .hidden-menu {
+    background: unset;
+  }
+
+  .nav-movie__menu_adapt {
+    width: 100%;
+  }
+
+  .nav-menu__close {
+    right: 13.44px;
+    top: 13.44px;
+  }
+
+  .nav-movie__movie_adapt {
+    margin-top: 144px;
+  }
+
+  .nav-movie__link-adapt_profile {
+    margin-top: 444px;
+  }
 }

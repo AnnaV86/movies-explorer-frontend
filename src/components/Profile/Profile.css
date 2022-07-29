@@ -132,3 +132,30 @@
     margin-top: 96px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .profile {
+    padding: 70px 30px 40px;
+  }
+
+  .profile__form {
+    margin-top: 63px;
+    width: 100%;
+  }
+
+  .profile__fieldset {
+    width: 260px;
+  }
+
+  .profile__input {
+    width: 80%;
+  }
+
+  .profile__buttons {
+    margin-top: 363px;
+  }
+
+  .profile__save-button {
+    width: 260px;
+  }
+}

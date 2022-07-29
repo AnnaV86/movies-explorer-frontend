@@ -20,7 +20,7 @@
 
 .search-movie {
   height: 40px;
-  width: 82%;
+  width: 80%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,6 +38,7 @@
 
 .search-form__input::placeholder {
   background: url(../../images/magnifier.svg) no-repeat;
+  padding-left: 40px;
 }
 
 .search-form__button {
@@ -60,8 +61,9 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
-  margin-left: 14px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .checkbox {
@@ -78,8 +80,9 @@
   height: 20px;
   background-image: url('../../images/smalltumboff.svg');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   cursor: pointer;
+  margin-right: 14px;
 }
 
 .checkbox__pseudo:hover {
@@ -94,7 +97,7 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 780px) {
   .search {
     padding: 80px 30px 109px;
   }
@@ -105,7 +108,58 @@
   }
 
   .search-movie {
+    width: 70%;
     padding-right: 19px;
     border-right: 1px solid #cbcbcb;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .search {
+    border-bottom: none;
+    padding: 80px 10px 10px;
+    margin-bottom: 0;
+  }
+
+  .search-form {
+    height: 182px;
+    flex-direction: column;
+    background-color: unset;
+    padding: 0;
+    border-radius: unset;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .search-movie {
+    background-color: #f9f9f9;
+    height: 72px;
+    padding-left: 19px;
+    width: 100%;
+    border-radius: 9px;
+  }
+
+  .search-form__input::placeholder {
+    background: unset;
+    padding-left: 0;
+  }
+
+  .search-form__input {
+    width: 80%;
+    height: 72px;
+  }
+
+  .search-form__button {
+    width: 14%;
+  }
+
+  .checkbox__label {
+    font-size: 11px;
+    line-height: 18px;
+    margin-left: 0;
+    padding-bottom: 44px;
+  }
+
+  .checkbox__pseudo {
+    margin-right: 13px;
   }
 }
