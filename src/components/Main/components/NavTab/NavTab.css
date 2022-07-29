@@ -42,3 +42,22 @@
     margin-top: 314px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .navigation {
+    margin-top: 212px;
+  }
+
+  .navigation__list {
+    width: 258px;
+  }
+
+  .navigation__item {
+    width: 82px;
+    height: 26px;
+  }
+
+  .navigation__link {
+    font-size: 10px;
+  }
+}

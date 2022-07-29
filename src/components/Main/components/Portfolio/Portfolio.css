@@ -66,3 +66,28 @@
     font-size: 28px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .portfolio {
+    margin-top: 69px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .website__list {
+    margin-top: 20px;
+  }
+
+  .website__item-text {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .website__item-link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
