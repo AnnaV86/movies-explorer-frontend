@@ -17,3 +17,16 @@
   row-gap: 30px;
   justify-content: center;
 }
+
+@media screen and (max-width: 910px) {
+  .movie-card-list {
+    padding: 70px 30px 30px;
+  }
+
+  .elements {
+    grid-template-columns: repeat(auto-fill, 339px);
+    grid-template-rows: repeat(auto-fill, 258px);
+    column-gap: 30px;
+    row-gap: 36px;
+  }
+}

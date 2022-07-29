@@ -52,3 +52,17 @@
 .website__item-link:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    margin-top: 90px;
+  }
+
+  .website__item-text {
+    font-size: 28px;
+  }
+
+  .website__item-link {
+    font-size: 28px;
+  }
+}

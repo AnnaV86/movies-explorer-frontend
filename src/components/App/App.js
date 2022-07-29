@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Main } from './components/Main/Main';
-import { Movies } from './components/Movies/Movies';
-import { SavedMovies } from './components/SavedMovies/SavedMovies';
-import { Profile } from './components/Profile/Profile';
-import { Login } from './components/Login/Login';
-import { Register } from './components/Register/Register';
+import { Main } from '../Main/Main';
+import { Movies } from '../Movies/Movies';
+import { SavedMovies } from '../SavedMovies/SavedMovies';
+import { Profile } from '../Profile/Profile';
+import { Login } from '../Login/Login';
+import { Register } from '../Register/Register';
 import './App.css';
-import { PageNotFound } from './components/PageNotFound/PageNotFound';
+import { PageNotFound } from '../PageNotFound/PageNotFound';
 
 export const App = () => {
   return (

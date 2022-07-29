@@ -1,5 +1,4 @@
 .about-project {
-  height: 608px;
   padding: 110px 70px;
   box-sizing: border-box;
 }
@@ -23,6 +22,11 @@
 
 .text__item {
   list-style: none;
+  margin-right: 10px;
+}
+
+.text__item:nth-child(2) {
+  margin-right: 0;
 }
 
 .text__title {
@@ -83,4 +87,19 @@
   margin: 0;
   margin-top: 14px;
   color: #a0a0a0;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .text__paragraph {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .week__container {
+    margin-top: 93px;
+  }
 }

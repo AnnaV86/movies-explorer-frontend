@@ -6,6 +6,9 @@ import { userData } from '../../constants/user';
 import { Header } from '../Header/Header';
 export const Profile = () => {
   const [edit, setEdit] = useState(false);
+  // временный useState для верстки span:"При обновлении профиля
+  //произошла ошибка." и неактивной кнопки Сохранить
+  const [error, setError] = useState(false);
   const { name, email } = userData;
 
   return (
@@ -43,9 +46,21 @@ export const Profile = () => {
               disabled={!edit}
             />
           </fieldset>
-
+          {error && (
+            <span className='profile__error'>
+              При обновлении профиля произошла ошибка.
+            </span>
+          )}
           {edit ? (
-            <button type='button' className='profile_save_button'>
+            <button
+              type='button'
+              className={
+                error
+                  ? 'profile__save-button profile__save-button_disable'
+                  : 'profile__save-button'
+              }
+              disabled={error}
+            >
               Сохранить
             </button>
           ) : (

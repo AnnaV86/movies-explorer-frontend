@@ -7,7 +7,7 @@ import { arreyMovie } from '../../constants/arrayMovie';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 export const SavedMovies = () => {
-    // Данный useState временный, для выполнения этапа верстка
+  // Данный useState временный, для выполнения этапа верстка
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const saveArreyMovie = arreyMovie.filter((movie) => movie.save);
 
@@ -20,7 +20,7 @@ export const SavedMovies = () => {
           <Preloader />
         ) : (
           <>
-            <MoviesCardList arreyMovie={saveArreyMovie} />
+            <MoviesCardList arreyMovie={saveArreyMovie} type={'save'} />
             <div className='indent'></div>
           </>
         )}

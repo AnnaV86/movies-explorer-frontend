@@ -1,5 +1,5 @@
 import './MoviesCard.css';
-export const MoviesCard = ({ movie }) => {
+export const MoviesCard = ({ movie, type }) => {
   const { nameRU, duration, image, save } = movie;
 
   const getTimeFromMins = (mins) => {
@@ -18,10 +18,14 @@ export const MoviesCard = ({ movie }) => {
           <h1 className='movie__title'>{nameRU}</h1>
           <p className='movie__duration'>{duretionHour}</p>
         </div>
-        {save ? (
-          <button className='movie__button movie__button_type_active'></button>
+        {type === 'all' ? (
+          save ? (
+            <button className='movie__button movie__button_type_active'></button>
+          ) : (
+            <button className='movie__button movie__button_type_disabled'></button>
+          )
         ) : (
-          <button className='movie__button movie__button_type_disabled'></button>
+          <button className='movie__button movie__button_type_close'></button>
         )}
       </div>
       <img className='movie__image' src={image} alt={nameRU} />

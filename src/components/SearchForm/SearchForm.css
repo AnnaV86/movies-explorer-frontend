@@ -20,10 +20,10 @@
 
 .search-movie {
   height: 40px;
-  width: 80%;
+  width: 82%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding-right: 30px;
   border-right: 1px solid #e8e8e8;
   box-sizing: border-box;
@@ -42,7 +42,6 @@
 
 .search-form__button {
   padding: 0;
-  margin-left: 46px;
   background-image: url(../../images/find.svg);
   background-repeat: no-repeat;
   width: 34px;
@@ -93,4 +92,20 @@
 
 .checkbox:checked + .checkbox__pseudo:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    padding: 80px 30px 109px;
+  }
+
+  .search-form {
+    padding-right: 20px;
+    padding-left: 19px;
+  }
+
+  .search-movie {
+    padding-right: 19px;
+    border-right: 1px solid #cbcbcb;
+  }
 }

@@ -2,6 +2,7 @@
   width: 364px;
   height: 271px;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
 .movie__info {
@@ -50,8 +51,24 @@
   background-image: url(../../../../images/save9d.svg);
 }
 
+.movie__button_type_close {
+  background-image: url(../../../../images/close.svg);
+}
+
 .movie__image {
   width: 364px;
   height: 203px;
   object-fit: cover;
+}
+
+@media screen and (max-width: 910px) {
+  .movie-card {
+    width: 339px;
+    height: 258px;
+  }
+
+  .movie__image {
+    width: 339px;
+    height: 258px;
+  }
 }

@@ -36,3 +36,9 @@
   font-size: 12px;
   line-height: 16px;
 }
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    margin-top: 314px;
+  }
+}

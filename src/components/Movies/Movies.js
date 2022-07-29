@@ -19,7 +19,7 @@ export const Movies = () => {
           <Preloader />
         ) : (
           <>
-            <MoviesCardList arreyMovie={arreyMovie} />
+            <MoviesCardList arreyMovie={arreyMovie} type={'all'} />
             <section className='more'>
               <button className='more__button'>Ещё</button>
             </section>

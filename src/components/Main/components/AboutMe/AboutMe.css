@@ -83,3 +83,35 @@
   overflow: hidden;
   border-radius: 10px;
 }
+
+@media screen and (max-width: 768px) {
+  .about-me {
+    padding: 90px 50px;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__profession {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__text {
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__link-list {
+    margin-top: 87px;
+  }
+
+  .photo {
+    width: 255px;
+    height: 307px;
+  }
+}
