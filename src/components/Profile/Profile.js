@@ -1,6 +1,7 @@
 import { React } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import classNames from 'classnames';
 import './Profile.css';
 import { userData } from '../../constants/user';
 import { Header } from '../Header/Header';
@@ -9,6 +10,9 @@ export const Profile = () => {
   // временный useState для верстки span:"При обновлении профиля
   //произошла ошибка." и неактивной кнопки Сохранить
   const [error, setError] = useState(false);
+  const classSaveButton = classNames(`profile__save-button`, {
+    ['profile__save-button_disable']: error,
+  });
   const { name, email } = userData;
 
   return (
@@ -52,15 +56,7 @@ export const Profile = () => {
             </span>
           )}
           {edit ? (
-            <button
-              type='button'
-              className={
-                error
-                  ? 'profile__save-button profile__save-button_disable'
-                  : 'profile__save-button'
-              }
-              disabled={error}
-            >
+            <button type='button' className={classSaveButton} disabled={error}>
               Сохранить
             </button>
           ) : (

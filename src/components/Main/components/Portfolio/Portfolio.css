@@ -3,6 +3,7 @@
 }
 
 .portfolio__title {
+  margin: 0;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -18,8 +19,8 @@
 
 .website__item {
   list-style: none;
-  padding-top: 20px;
-  padding-bottom: 19px;
+  padding-top: 15px;
+  padding-bottom: 14px;
   border-bottom: 1px solid #e8e8e8;
   display: flex;
   align-items: center;
@@ -36,6 +37,7 @@
   font-weight: 400;
   font-size: 30px;
   line-height: 50px;
+  letter-spacing: -0.04em;
   color: black;
 }
 
@@ -47,6 +49,7 @@
   cursor: pointer;
   text-decoration: none;
   color: black;
+  letter-spacing: -0.04em;
 }
 
 .website__item-link:hover {
@@ -79,6 +82,11 @@
 
   .website__list {
     margin-top: 20px;
+  }
+
+  .website__item {
+    padding-top: 20px;
+    padding-bottom: 19px;
   }
 
   .website__item-text {

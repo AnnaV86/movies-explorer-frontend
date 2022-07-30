@@ -6,7 +6,7 @@ export const Footer = () => {
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h1>
       <div className='footer__info'>
-        <p className='footer__year'>© 2022</p>
+        <p className='footer__year'>&copy; 2022</p>
         <ul className='footer__list'>
           <li className='footer__list-item'>
             <a

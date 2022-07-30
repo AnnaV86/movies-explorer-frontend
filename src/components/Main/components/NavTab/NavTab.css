@@ -46,6 +46,7 @@
 @media screen and (max-width: 400px) {
   .navigation {
     margin-top: 212px;
+    margin-bottom: 17px;
   }
 
   .navigation__list {

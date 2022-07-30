@@ -17,7 +17,7 @@
 .profile__form {
   margin-top: 107px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 11px;
   line-height: 13px;
   width: 410px;
@@ -28,6 +28,7 @@
 }
 
 .profile__fieldset {
+  padding: 0;
   margin: 0;
   width: 410px;
   height: 48px;
@@ -45,10 +46,12 @@
 }
 
 .profile__label {
+  font-weight: 500;
   float: left;
 }
 
 .profile__input {
+  padding: 0;
   background: unset;
   border: none;
   text-align: right;
@@ -90,7 +93,7 @@
 }
 
 .profile__buttons {
-  margin-top: 203px;
+  margin-top: 202px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -129,7 +132,11 @@
   }
 
   .profile__form {
-    margin-top: 96px;
+    margin-top: 79px;
+  }
+
+  .profile__buttons {
+    margin-top: 193px;
   }
 }
 
@@ -152,7 +159,17 @@
   }
 
   .profile__buttons {
-    margin-top: 363px;
+    margin-top: 362px;
+  }
+
+  .profile__edit {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__logout {
+    font-size: 12px;
+    line-height: 15px;
   }
 
   .profile__save-button {

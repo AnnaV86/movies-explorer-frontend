@@ -1,8 +1,17 @@
 .search {
   padding: 70px;
-  border-bottom: 1px solid #e8e8e8;
   margin-bottom: 10px;
   box-sizing: border-box;
+  position: relative;
+}
+
+.search:before {
+  position: absolute;
+  bottom: 0;
+  left: 70px;
+  width: 89%;
+  border-top: 1px solid #e8e8e8;
+  content: '';
 }
 
 .search-form {
@@ -19,8 +28,9 @@
 }
 
 .search-movie {
+  margin: 0;
   height: 40px;
-  width: 80%;
+  width: 82%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,7 +48,10 @@
 
 .search-form__input::placeholder {
   background: url(../../images/magnifier.svg) no-repeat;
-  padding-left: 40px;
+  padding-left: 38px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
 }
 
 .search-form__button {
@@ -82,7 +95,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
-  margin-right: 14px;
+  margin-right: 12px;
 }
 
 .checkbox__pseudo:hover {
@@ -124,13 +137,24 @@
     padding-right: 19px;
     border-right: 1px solid #cbcbcb;
   }
+
+  .search-form__input {
+    padding: 0;
+  }
+
+  .search-form__input::placeholder {
+    padding-left: 45px;
+  }
 }
 
 @media screen and (max-width: 767px) {
   .search {
     border-bottom: none;
-    padding: 80px 10px 10px;
+    padding: 79px 10px 10px;
     margin-bottom: 0;
+  }
+  .search:before {
+    display: none;
   }
 
   .search-form {
@@ -153,6 +177,7 @@
   .search-form__input::placeholder {
     background: unset;
     padding-left: 0;
+    font-size: 14px;
   }
 
   .search-form__input {
@@ -161,17 +186,17 @@
   }
 
   .search-form__button {
-    width: 14%;
+    width: 13%;
   }
 
   .checkbox__label {
     font-size: 11px;
     line-height: 18px;
-    margin-left: 0;
-    padding-bottom: 44px;
+    margin-left: 2px;
+    padding-bottom: 45px;
   }
 
   .checkbox__pseudo {
-    margin-right: 13px;
+    margin-right: 11px;
   }
 }

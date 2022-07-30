@@ -2,6 +2,7 @@ import './Form.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import { useState } from 'react';
+import classNames from 'classnames';
 export const Form = ({ title, type, button, text }) => {
   const [messageError, setMessageError] = useState({
     name: '',
@@ -13,8 +14,16 @@ export const Form = ({ title, type, button, text }) => {
     email: '',
     password: '',
   });
+  const classErrorName = classNames(`form__input`, {
+    error: messageError.name,
+  });
+  const classErrorEmail = classNames(`form__input`, {
+    error: messageError.email,
+  });
+  const classErrorPassword = classNames(`form__input`, {
+    error: messageError.password,
+  });
 
-  // console.log(messageError);
   const handleChange = (evt) => {
     const { name, value } = evt.target;
     setValue((prev) => ({ ...prev, [name]: value }));
@@ -37,9 +46,7 @@ export const Form = ({ title, type, button, text }) => {
               <label className='form__label'>Имя</label>
               <input
                 type='text'
-                className={
-                  messageError.name ? 'form__input error' : 'form__input'
-                }
+                className={classErrorName}
                 name='name'
                 required
                 pattern='^[A-Za-zА-Яа-яЁё /s -]+$'
@@ -57,33 +64,21 @@ export const Form = ({ title, type, button, text }) => {
             <label className='form__label'>E-mail</label>
             <input
               type='email'
-              className={
-                messageError.email ? 'form__input error' : 'form__input'
-              }
+              className={classErrorEmail}
               name='email'
               required
               value={value.email}
               onChange={handleChange}
             />
             {messageError.email && (
-              <span
-                className={
-                  messageError.email.length < 80
-                    ? 'form__span-error'
-                    : 'form__span-error form__span-error_type_long'
-                }
-              >
-                {messageError.email}
-              </span>
+              <span className='form__span-error'>{messageError.email}</span>
             )}
           </fieldset>
           <fieldset className='form__fieldset'>
             <label className='form__label'>Пароль</label>
             <input
               type='password'
-              className={
-                messageError.password ? 'form__input error' : 'form__input'
-              }
+              className={classErrorPassword}
               name='password'
               value={value.password}
               required

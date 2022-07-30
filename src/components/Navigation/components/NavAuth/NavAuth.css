@@ -6,6 +6,7 @@
   font-size: 12px;
   font-style: normal;
   line-height: 16px;
+  margin-top: -3px;
 }
 
 .menu__link {
@@ -32,6 +33,7 @@
 @media screen and (max-width: 320px) {
   .menu {
     font-size: 10px;
+    margin-top: 2px;
   }
 
   .button {

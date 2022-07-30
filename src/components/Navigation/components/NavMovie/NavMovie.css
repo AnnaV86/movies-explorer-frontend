@@ -74,5 +74,7 @@
   .nav-menu__menu-adapt {
     width: 40px;
     height: 43px;
+    background-size: contain;
+    background-position: center;
   }
 }

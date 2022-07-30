@@ -21,8 +21,8 @@
 }
 
 .nav-menu__close {
-  height: 22px;
-  width: 22px;
+  height: 33px;
+  width: 33px;
   background-image: url(../../../../../images/close\ menu.svg);
   background-position: center;
   background-size: contain;
@@ -88,6 +88,10 @@
 
   .nav-movie__movie_adapt {
     margin-top: 144px;
+  }
+
+  .nav-movie__link-adapt {
+    margin-bottom: 24px;
   }
 
   .nav-movie__link-adapt_profile {

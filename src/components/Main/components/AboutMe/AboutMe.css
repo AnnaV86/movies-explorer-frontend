@@ -1,6 +1,6 @@
 .about-me {
   width: 100%;
-  padding: 110px 70px 125px;
+  padding: 110px 70px 105px;
   box-sizing: border-box;
 }
 
@@ -12,10 +12,11 @@
   margin: 0;
   padding-bottom: 23px;
   border-bottom: 1px solid #000;
+  letter-spacing: -0.04em;
 }
 
 .about-me__content {
-  margin-top: 66px;
+  margin-top: 65px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -32,6 +33,7 @@
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
+  letter-spacing: -0.04em;
 }
 
 .about-me__profession {
@@ -86,7 +88,7 @@
 
 @media screen and (max-width: 768px) {
   .about-me {
-    padding: 90px 50px;
+    padding: 90px 50px 70px;
   }
 
   .about-me__name {
@@ -121,6 +123,9 @@
     padding: 70px 14px 51px;
   }
 
+  .about-me__content {
+    margin-top: 60px;
+  }
   .title {
     font-size: 18px;
     line-height: 22px;
@@ -160,6 +165,6 @@
   }
 
   .about-me__link-list {
-    margin-top: 40px;
+    margin-top: 41px;
   }
 }
