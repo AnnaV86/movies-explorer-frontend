@@ -1,14 +1,48 @@
+import React, { useEffect, useState } from 'react';
 import './MoviesCardList.css';
 import { MoviesCard } from './components/MoviesCard/MoviesCard';
+import { More } from './components/More/More';
 
-export const MoviesCardList = ({ arreyMovie, type }) => {
+export const MoviesCardList = ({ arrayMovie, type }) => {
+  const [counter, setCounter] = useState();
+  const [moreCard, setMoreCard] = useState();
+
+  const determiningCountCards = (width) => {
+    if (width > 1279) {
+      setCounter(12);
+      return setMoreCard(3);
+    } else if (width > 767) {
+      setCounter(8);
+      return setMoreCard(2);
+    } else setCounter(5);
+    return setMoreCard(2);
+  };
+
+  useEffect(() => {
+    const width = window.innerWidth;
+    determiningCountCards(width);
+  }, []);
+
+  const addCounter = () => setCounter((...prev) => Number(prev) + moreCard);
+
+  useEffect(() => {
+    const setTimeOut = (e) => setTimeout(determiningCountCards(e), 3000);
+    window.addEventListener('resize', (e) =>
+      setTimeOut(e.currentTarget.innerWidth)
+    );
+    return window.removeEventListener('resize', (e) =>
+      setTimeOut(e.currentTarget.innerWidth)
+    );
+  }, []);
+
   return (
     <section className='movie-card-list'>
       <ul className='elements'>
-        {arreyMovie.map((movie) => {
-          return <MoviesCard movie={movie} key={movie._id} type={type} />;
+        {arrayMovie.slice(0, counter).map((movie) => {
+          return <MoviesCard movie={movie} key={movie.id} type={type} />;
         })}
       </ul>
+      <More addCounter={addCounter} />
     </section>
   );
 };

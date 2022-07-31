@@ -9,6 +9,7 @@ export const MoviesCard = ({ movie, type }) => {
   };
 
   const duretionHour = getTimeFromMins(duration);
+  const imageMovie = `https://api.nomoreparties.co${image.url}`;
 
   return (
     <section className='movie-card'>
@@ -36,7 +37,7 @@ export const MoviesCard = ({ movie, type }) => {
           ></button>
         )}
       </div>
-      <img className='movie__image' src={image} alt={nameRU} />
+      <img className='movie__image' src={imageMovie} alt={nameRU} />
     </section>
   );
 };

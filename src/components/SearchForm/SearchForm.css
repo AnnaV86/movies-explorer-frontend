@@ -44,6 +44,7 @@
   width: 87%;
   border: none;
   background-color: unset;
+  outline: unset;
 }
 
 .search-form__input::placeholder {
@@ -67,6 +68,15 @@
 
 .search-form__button:hover {
   opacity: 0.8;
+}
+
+.form__span-error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  margin-top: 16px;
+  margin-left: 35px;
 }
 
 .checkbox__label {
