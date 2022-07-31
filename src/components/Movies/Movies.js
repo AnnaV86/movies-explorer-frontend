@@ -13,7 +13,7 @@ export const Movies = () => {
   return (
     <>
       <Header />
-      <section className='movies'>
+      <main className='movies'>
         <SearchForm />
         {preloaderOpen ? (
           <Preloader />
@@ -21,11 +21,13 @@ export const Movies = () => {
           <>
             <MoviesCardList arreyMovie={arreyMovie} type={'all'} />
             <section className='more'>
-              <button className='more__button'>Ещё</button>
+              <button type='button' className='more__button'>
+                Ещё
+              </button>
             </section>
           </>
         )}
-      </section>
+      </main>
       <Footer />
     </>
   );

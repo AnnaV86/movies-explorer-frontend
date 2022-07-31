@@ -90,7 +90,7 @@ export const Form = ({ title, type, button, text }) => {
             )}
           </fieldset>
         </div>
-        <button className='form__button'>{button}</button>
+        <button type='submit' className='form__button'>{button}</button>
         <p className='form__text'>
           {text}
           {type === 'signup' ? (

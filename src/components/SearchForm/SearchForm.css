@@ -167,6 +167,7 @@
   }
 
   .search-movie {
+    border: none;
     background-color: #f9f9f9;
     height: 72px;
     padding-left: 19px;

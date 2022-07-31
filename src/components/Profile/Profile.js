@@ -11,14 +11,14 @@ export const Profile = () => {
   //произошла ошибка." и неактивной кнопки Сохранить
   const [error, setError] = useState(false);
   const classSaveButton = classNames(`profile__save-button`, {
-    ['profile__save-button_disable']: error,
+    'profile__save-button_disable': error,
   });
   const { name, email } = userData;
 
   return (
     <>
       <Header />
-      <section className='profile'>
+      <main className='profile'>
         <h1 className='profile__title'>{`Привет, ${name}!`}</h1>
         <form className='profile__form'>
           <fieldset className='profile__fieldset'>
@@ -56,7 +56,7 @@ export const Profile = () => {
             </span>
           )}
           {edit ? (
-            <button type='button' className={classSaveButton} disabled={error}>
+            <button type='submit' className={classSaveButton} disabled={error}>
               Сохранить
             </button>
           ) : (
@@ -70,7 +70,7 @@ export const Profile = () => {
             </div>
           )}
         </form>
-      </section>
+      </main>
     </>
   );
 };

@@ -14,7 +14,7 @@ export const SavedMovies = () => {
   return (
     <>
       <Header />
-      <section className='movies'>
+      <main className='movies'>
         <SearchForm />
         {preloaderOpen ? (
           <Preloader />
@@ -24,7 +24,7 @@ export const SavedMovies = () => {
             <div className='indent'></div>
           </>
         )}
-      </section>
+      </main>
       <Footer />
     </>
   );

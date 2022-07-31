@@ -8,6 +8,7 @@ export const SearchForm = () => {
             className='search-form__input'
             type='text'
             placeholder={`Фильм`}
+            required
           />
           <button className='search-form__button' type='button'></button>
         </div>

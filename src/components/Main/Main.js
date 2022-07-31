@@ -10,12 +10,12 @@ export const Main = () => {
   return (
     <>
       <Header />
-      <section className='content'>
+      <main className='content'>
         <Promo />
         <AboutProject />
         <Techs />
         <AboutMe />
-      </section>
+      </main>
       <Footer />
     </>
   );

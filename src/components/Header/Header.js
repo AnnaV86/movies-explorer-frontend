@@ -6,11 +6,11 @@ import logo from '../../images/logo.svg';
 
 export const Header = () => {
   return (
-    <div className='header'>
+    <header className='header'>
       <Link to='/' className='header__link'>
         <img className='header__logo' src={logo} alt='logo' />
       </Link>
       <Navigation />
-    </div>
+    </header>
   );
 };
