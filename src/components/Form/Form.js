@@ -41,12 +41,19 @@ export const Form = ({
     }));
   };
 
+  console.log(type);
+
   const enterRegistration = (e) => {
-    if (!userData.name || !userData.password || !userData.email) {
+    if (type === 'signin' && (!userData.password || !userData.email)) {
       return;
+    } else if (
+      type === 'signup' &&
+      (!userData.name || !userData.password || !userData.email)
+    ) {
+      return;
+    } else {
+      return onClick(userData);
     }
-    e.preventDefault();
-    onClick(userData);
   };
 
   return (
@@ -108,7 +115,7 @@ export const Form = ({
         </div>
         {!isAccept && <span className='form__error'>{messageAccept}</span>}
         <button
-          type='submit'
+          type='button'
           className='form__button'
           onClick={enterRegistration}
         >

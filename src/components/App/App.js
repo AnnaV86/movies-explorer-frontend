@@ -14,6 +14,8 @@ import {
   getUserInfo,
   getMovies,
   updateUserData,
+  addSaveMovies,
+  deleteSaveMovies,
 } from '../../utils/MainApi';
 import { signupFetch, signinFetch, validJWTFetch } from '../../utils/auth';
 import { CurrentMoviesSaveContext } from '../../contexts/CurrentMoviesSaveContext';
@@ -25,9 +27,6 @@ export const App = () => {
   const [messageAcceptAuth, setMessageAcceptAuth] = useState('');
   const [isAccept, setIsAccept] = useState(true);
   const [login, setLogin] = useState(false);
-  const [userDataAuth, setUserDataAuth] = useState({
-    email: '',
-  });
 
   // Регистрация
   const onRegister = async (userData) => {
@@ -70,7 +69,6 @@ export const App = () => {
       localStorage.setItem('token', response.token);
       headers.authorization = `Bearer ${localStorage.getItem('token')}`;
       setLogin(true);
-      setUserDataAuth(userData);
       navigate('/movies');
     } else {
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
@@ -82,15 +80,12 @@ export const App = () => {
   const onSignOut = () => {
     localStorage.removeItem('token');
     setLogin(false);
-    setUserDataAuth({
-      email: '',
-    });
   };
 
   // Редактирование профиля
   const onClickUpdateProfile = async (userDataNew) => {
     const response = await updateUserData(userDataNew);
-    console.log('response', response);
+
     if (response._id) {
       console.log('222');
       setIsAccept(false);
@@ -107,14 +102,51 @@ export const App = () => {
     }
   };
 
+  // Удаление фильма из сохраненных по id
+  const onClickDeleteMovie = async (id) => {
+    console.log('все гут, я тут');
+    const response = await deleteSaveMovies(id);
+    console.log('response>>>', response);
+    if (response.message === 'Фильм удалён') {
+      console.log('удаление');
+      setCurrentMovies((prev) => prev.filter((el) => el._id !== id));
+    } else {
+      setIsAccept(false);
+      setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
+    }
+  };
+
+  console.log('currentMovies in App', currentMovies);
+  // Сохранение фильма по id
+  const onClickSaveMovie = async (movie, status, id) => {
+    console.log(movie);
+    if (status === 'delete') {
+      onClickDeleteMovie(id);
+      return;
+    }
+    const movieNew = {
+      ...movie,
+      image: `https://api.nomoreparties.co${movie.image.url}`,
+      thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+      movieId: movie.id,
+    };
+    delete movieNew.id;
+    delete movieNew.created_at;
+    delete movieNew.updated_at;
+    const response = await addSaveMovies(movieNew);
+    if (response._id) {
+      setCurrentMovies((prev) => [...prev, response]);
+    } else {
+      setIsAccept(false);
+      setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
+    }
+  };
+
   useEffect(() => {
     (async () => {
       const response = await tokenCheck();
       if (response) {
         setLogin(true);
-        setUserDataAuth({
-          email: response.email,
-        });
       }
     })();
   }, [login, navigate]);
@@ -142,10 +174,20 @@ export const App = () => {
           <div className='page'>
             <Routes>
               <Route exact path='/' element={<Main login={login} />} />
-              <Route path='/movies' element={<Movies login={login} />} />
+              <Route
+                path='/movies'
+                element={
+                  <Movies login={login} onClickSaveMovie={onClickSaveMovie} />
+                }
+              />
               <Route
                 path='/saved-movies'
-                element={<SavedMovies login={login} />}
+                element={
+                  <SavedMovies
+                    login={login}
+                    onClickDeleteMovie={onClickDeleteMovie}
+                  />
+                }
               />
               <Route
                 path='/profile'

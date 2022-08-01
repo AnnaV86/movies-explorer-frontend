@@ -7,7 +7,7 @@ import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import { CurrentMoviesSaveContext } from '../../contexts/CurrentMoviesSaveContext';
 import { NotFound } from '../NotFound/NotFound';
-export const SavedMovies = ({ login }) => {
+export const SavedMovies = ({ login, onClickDeleteMovie }) => {
   const currentMovies = useContext(CurrentMoviesSaveContext);
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const [message, setMessage] = useState(false);
@@ -31,7 +31,11 @@ export const SavedMovies = ({ login }) => {
         ) : (
           currentMovies.length > 0 && (
             <>
-              <MoviesCardList arreyMovie={currentMovies} type={'save'} />
+              <MoviesCardList
+                arreyMovie={currentMovies}
+                type={'save'}
+                onClickButtonMovie={onClickDeleteMovie}
+              />
               <div className='indent'></div>
             </>
           )

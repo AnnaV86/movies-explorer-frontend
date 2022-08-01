@@ -7,7 +7,7 @@ import './Movies.css';
 import { Header } from '../Header/Header';
 import { getMoviesListFetch } from '../../utils/MoviesApi';
 import { NotFound } from '../NotFound/NotFound';
-export const Movies = ({ login }) => {
+export const Movies = ({ login, onClickSaveMovie }) => {
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const [arrayMovies, setArrayMovies] = useState([]);
   const [searchText, setSearchText] = useState('');
@@ -55,7 +55,11 @@ export const Movies = ({ login }) => {
         {preloaderOpen ? (
           <Preloader />
         ) : (
-          <MoviesCardList arrayMovie={filteredArrayMovies} type={'all'} />
+          <MoviesCardList
+            arrayMovie={filteredArrayMovies}
+            type={'all'}
+            onClickButtonMovie={onClickSaveMovie}
+          />
         )}
       </main>
       <Footer />

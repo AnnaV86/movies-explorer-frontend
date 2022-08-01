@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './MoviesCardList.css';
 import { MoviesCard } from './components/MoviesCard/MoviesCard';
 import { More } from './components/More/More';
 
-export const MoviesCardList = ({ arrayMovie, type }) => {
+export const MoviesCardList = ({ arrayMovie, type, onClickButtonMovie }) => {
   const [counter, setCounter] = useState();
   const [moreCard, setMoreCard] = useState();
 
@@ -40,10 +40,24 @@ export const MoviesCardList = ({ arrayMovie, type }) => {
       <ul className='elements'>
         {type === 'all'
           ? arrayMovie.slice(0, counter).map((movie) => {
-              return <MoviesCard movie={movie} key={movie.id} type={type} />;
+              return (
+                <MoviesCard
+                  movie={movie}
+                  key={movie.id}
+                  type={type}
+                  onClickButtonMovie={onClickButtonMovie}
+                />
+              );
             })
           : arrayMovie.map((movie) => {
-              return <MoviesCard movie={movie} key={movie.id} type={type} />;
+              return (
+                <MoviesCard
+                  movie={movie}
+                  key={movie.id}
+                  type={type}
+                  onClickButtonMovie={onClickButtonMovie}
+                />
+              );
             })}
       </ul>
       {arrayMovie.length > counter && <More addCounter={addCounter} />}

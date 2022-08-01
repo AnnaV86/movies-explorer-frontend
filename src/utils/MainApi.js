@@ -35,7 +35,6 @@ export const getMovies = async () => {
 
 // Редактирование данных пользователя PATCH
 export const updateUserData = async (userData) => {
-  console.log('1 api userData:', userData);
   const response = await fetch(`${BASE_URL_MAIN}/users/me`, {
     method: 'PATCH',
     headers: headers,
@@ -43,6 +42,29 @@ export const updateUserData = async (userData) => {
       name: userData.name,
       email: userData.email,
     }),
+  });
+  console.log(response);
+  return await getResponse(response);
+};
+
+// Добавить фильм в сохраненные POST /movies
+export const addSaveMovies = async (movieData) => {
+  console.log('1 api movieData:', movieData);
+  const response = await fetch(`${BASE_URL_MAIN}/movies`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(movieData),
+  });
+  console.log(response);
+  return await getResponse(response);
+};
+
+// Удаление фильма из сохраненных DELETE /movies/:id
+export const deleteSaveMovies = async (id) => {
+  console.log('1 api movieData:', id);
+  const response = await fetch(`${BASE_URL_MAIN}/movies/${id}`, {
+    method: 'DELETE',
+    headers: headers,
   });
   console.log(response);
   return await getResponse(response);
