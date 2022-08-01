@@ -38,9 +38,13 @@ export const MoviesCardList = ({ arrayMovie, type }) => {
   return (
     <section className='movie-card-list'>
       <ul className='elements'>
-        {arrayMovie.slice(0, counter).map((movie) => {
-          return <MoviesCard movie={movie} key={movie.id} type={type} />;
-        })}
+        {type === 'all'
+          ? arrayMovie.slice(0, counter).map((movie) => {
+              return <MoviesCard movie={movie} key={movie.id} type={type} />;
+            })
+          : arrayMovie.map((movie) => {
+              return <MoviesCard movie={movie} key={movie.id} type={type} />;
+            })}
       </ul>
       {arrayMovie.length > counter && <More addCounter={addCounter} />}
     </section>

@@ -1,28 +1,23 @@
-export class Api {
-  constructor(options) {
-    this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
-  }
+const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
-  // Запрашиваем все фильмы
-  getMoviesListFetch() {
-    return fetch(`${this._baseUrl}`, {
-      headers: this._headers,
-    }).then(this._getResponseData);
-  }
-
-  _getResponseData(res) {
-    if (res.ok) {
-      return res.json();
+// Обработка ответа от сервера
+const getResponse = (response) => {
+  try {
+    if (!response.ok) {
+      throw new Error('Ошибка запроса');
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return response.json();
+  } catch (err) {
+    return err;
   }
-}
+};
 
-export let api = new Api({
-  baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-});
+export const getMoviesListFetch = async () => {
+  const response = await fetch(BASE_URL, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  return await getResponse(response);
+};

@@ -3,13 +3,21 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import { useState } from 'react';
 import classNames from 'classnames';
-export const Form = ({ title, type, button, text }) => {
+export const Form = ({
+  title,
+  type,
+  button,
+  text,
+  onClick,
+  messageAccept,
+  isAccept,
+}) => {
   const [messageError, setMessageError] = useState({
     name: '',
     email: '',
     password: '',
   });
-  const [value, setValue] = useState({
+  const [userData, setUserData] = useState({
     name: '',
     email: '',
     password: '',
@@ -26,11 +34,19 @@ export const Form = ({ title, type, button, text }) => {
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
-    setValue((prev) => ({ ...prev, [name]: value }));
+    setUserData((prev) => ({ ...prev, [name]: value }));
     setMessageError((prev) => ({
       ...prev,
       [name]: evt.target.validationMessage,
     }));
+  };
+
+  const enterRegistration = (e) => {
+    if (!userData.name || !userData.password || !userData.email) {
+      return;
+    }
+    e.preventDefault();
+    onClick(userData);
   };
 
   return (
@@ -52,7 +68,7 @@ export const Form = ({ title, type, button, text }) => {
                 pattern='^[A-Za-zА-Яа-яЁё /s -]+$'
                 minLength={2}
                 maxLength={100}
-                value={value.name}
+                value={userData.name}
                 onChange={handleChange}
               />
               {messageError.name && (
@@ -67,7 +83,7 @@ export const Form = ({ title, type, button, text }) => {
               className={classErrorEmail}
               name='email'
               required
-              value={value.email}
+              value={userData.email}
               onChange={handleChange}
             />
             {messageError.email && (
@@ -80,7 +96,7 @@ export const Form = ({ title, type, button, text }) => {
               type='password'
               className={classErrorPassword}
               name='password'
-              value={value.password}
+              value={userData.password}
               required
               minLength={8}
               onChange={handleChange}
@@ -90,7 +106,14 @@ export const Form = ({ title, type, button, text }) => {
             )}
           </fieldset>
         </div>
-        <button type='submit' className='form__button'>{button}</button>
+        {!isAccept && <span className='form__error'>{messageAccept}</span>}
+        <button
+          type='submit'
+          className='form__button'
+          onClick={enterRegistration}
+        >
+          {button}
+        </button>
         <p className='form__text'>
           {text}
           {type === 'signup' ? (

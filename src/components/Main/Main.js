@@ -6,10 +6,10 @@ import { AboutMe } from './components/AboutMe/AboutMe';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 
-export const Main = () => {
+export const Main = ({ login }) => {
   return (
     <>
-      <Header />
+      <Header login={login} />
       <main className='content'>
         <Promo />
         <AboutProject />

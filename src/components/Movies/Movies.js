@@ -5,9 +5,9 @@ import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
 import { Header } from '../Header/Header';
-import { api } from '../../utils/MoviesApi';
+import { getMoviesListFetch } from '../../utils/MoviesApi';
 import { NotFound } from '../NotFound/NotFound';
-export const Movies = () => {
+export const Movies = ({ login }) => {
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const [arrayMovies, setArrayMovies] = useState([]);
   const [searchText, setSearchText] = useState('');
@@ -15,11 +15,10 @@ export const Movies = () => {
   const [shortFilter, setShortFilter] = useState(false);
   const [message, setMessage] = useState(false);
 
-  console.log(message);
   const requestArray = async (searchData) => {
     if (arrayMovies.length === 0) {
       setPreloaderOpen(true);
-      const allMovies = await api.getMoviesListFetch();
+      const allMovies = await getMoviesListFetch();
       setArrayMovies(allMovies);
     }
     setSearchText(searchData.text);
@@ -49,7 +48,7 @@ export const Movies = () => {
 
   return (
     <>
-      <Header />
+      <Header login={login} />
       <main className='movies'>
         <SearchForm requestArray={requestArray} />
         {message && <NotFound type={'notFound'} />}
