@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import './SearchForm.css';
-export const SearchForm = ({ requestArray, handleShortMovies }) => {
-  const [value, setValue] = useState('');
+export const SearchForm = ({ requestArray }) => {
+  const [value, setValue] = useState({ text: '', short: false });
   const [messageError, setMessageError] = useState('');
 
   const handleChange = (evt) => {
     evt.preventDefault();
     const { value } = evt.target;
-    setValue(value);
+    setValue((prev) => ({ ...prev, text: value }));
     setMessageError(evt.target.validationMessage);
+  };
+
+  const handleShort = () => {
+    setValue((prev) => ({ ...prev, short: !value.short }));
   };
 
   const onClickSearch = () => {
@@ -25,19 +29,26 @@ export const SearchForm = ({ requestArray, handleShortMovies }) => {
             className='search-form__input'
             type='text'
             placeholder={`Фильм`}
-            value={value}
+            value={value.text}
             onChange={handleChange}
+            name='text'
             required
           />
           <button
             className='search-form__button'
             type='button'
-            onClick={onClickSearch}
+            onClick={(e) => onClickSearch(e)}
           ></button>
         </div>
         <label className='checkbox__label'>
-          <input className='checkbox' type='checkbox' value='short' />
-          <span className='checkbox__pseudo' onClick={handleShortMovies}></span>
+          <input
+            className='checkbox'
+            type='checkbox'
+            value={true}
+            name='short'
+            onClick={handleShort}
+          />
+          <span className='checkbox__pseudo'></span>
           Короткометражки
         </label>
       </form>

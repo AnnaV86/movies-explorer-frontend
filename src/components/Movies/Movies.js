@@ -6,47 +6,57 @@ import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
 import { Header } from '../Header/Header';
 import { api } from '../../utils/MoviesApi';
+import { NotFound } from '../NotFound/NotFound';
 export const Movies = () => {
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const [arrayMovies, setArrayMovies] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [filteredArrayMovies, setFilteredArrayMovies] = useState([]);
   const [shortFilter, setShortFilter] = useState(false);
+  const [message, setMessage] = useState(false);
 
-  const requestArray = async (text) => {
+  console.log(message);
+  const requestArray = async (searchData) => {
     if (arrayMovies.length === 0) {
       setPreloaderOpen(true);
       const allMovies = await api.getMoviesListFetch();
       setArrayMovies(allMovies);
-      setSearchText(text);
     }
-    return setSearchText(text);
+    setSearchText(searchData.text);
+    return setShortFilter(searchData.short);
   };
 
   useEffect(() => {
     const filteredArray = arrayMovies.filter(
       (movie) => movie.nameRU.indexOf(searchText) >= 0
     );
-    setFilteredArrayMovies(filteredArray);
-    setPreloaderOpen(false);
-  }, [arrayMovies, searchText]);
-
-  const handleShortMovies = () => {};
+    if (shortFilter) {
+      const shortArray = filteredArray.filter((movie) => movie.duration < 41);
+      if (arrayMovies.length > 0 && shortArray.length === 0) {
+        setMessage(true);
+      } else {
+        setMessage(false);
+      }
+      setFilteredArrayMovies(shortArray);
+    } else {
+      if (arrayMovies.length > 0 && filteredArray.length === 0) {
+        setMessage(true);
+      } else setMessage(false);
+      setFilteredArrayMovies(filteredArray);
+    }
+    return setPreloaderOpen(false);
+  }, [arrayMovies, searchText, shortFilter]);
 
   return (
     <>
       <Header />
       <main className='movies'>
-        <SearchForm
-          requestArray={requestArray}
-          handleShortMovies={handleShortMovies}
-        />
+        <SearchForm requestArray={requestArray} />
+        {message && <NotFound type={'notFound'} />}
         {preloaderOpen ? (
           <Preloader />
         ) : (
-          <>
-            <MoviesCardList arrayMovie={filteredArrayMovies} type={'all'} />
-          </>
+          <MoviesCardList arrayMovie={filteredArrayMovies} type={'all'} />
         )}
       </main>
       <Footer />

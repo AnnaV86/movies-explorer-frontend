@@ -42,7 +42,7 @@ export const MoviesCardList = ({ arrayMovie, type }) => {
           return <MoviesCard movie={movie} key={movie.id} type={type} />;
         })}
       </ul>
-      <More addCounter={addCounter} />
+      {arrayMovie.length > counter && <More addCounter={addCounter} />}
     </section>
   );
 };
