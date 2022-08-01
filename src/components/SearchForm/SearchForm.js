@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './SearchForm.css';
-export const SearchForm = ({ requestArray }) => {
+export const SearchForm = ({ requestArray, openPopupsMessage }) => {
   const [value, setValue] = useState({ text: '', short: false });
   const [messageError, setMessageError] = useState('');
 
@@ -17,7 +17,7 @@ export const SearchForm = ({ requestArray }) => {
 
   const onClickSearch = () => {
     if (messageError) {
-      return console.log('ошибка');
+      return openPopupsMessage('Пожалуйста, заполните форму поиска');
     } else return requestArray(value);
   };
 

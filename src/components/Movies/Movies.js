@@ -6,14 +6,13 @@ import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
 import { Header } from '../Header/Header';
 import { getMoviesListFetch } from '../../utils/MoviesApi';
-import { NotFound } from '../NotFound/NotFound';
-export const Movies = ({ login, onClickSaveMovie }) => {
+import { NOT_FOUND_MESSAGE, ERROR_SERVER_MESSAGE } from '../../constants/index';
+export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const [arrayMovies, setArrayMovies] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [filteredArrayMovies, setFilteredArrayMovies] = useState([]);
   const [shortFilter, setShortFilter] = useState(false);
-  const [message, setMessage] = useState(false);
 
   const requestArray = async (searchData) => {
     if (arrayMovies.length === 0) {
@@ -32,16 +31,16 @@ export const Movies = ({ login, onClickSaveMovie }) => {
     if (shortFilter) {
       const shortArray = filteredArray.filter((movie) => movie.duration < 41);
       if (arrayMovies.length > 0 && shortArray.length === 0) {
-        setMessage(true);
+        console.log('это я');
+        openPopupsMessage(NOT_FOUND_MESSAGE);
       } else {
-        setMessage(false);
+        setFilteredArrayMovies(shortArray);
       }
-      setFilteredArrayMovies(shortArray);
     } else {
       if (arrayMovies.length > 0 && filteredArray.length === 0) {
-        setMessage(true);
-      } else setMessage(false);
-      setFilteredArrayMovies(filteredArray);
+        console.log('а это я');
+        openPopupsMessage(NOT_FOUND_MESSAGE);
+      } else setFilteredArrayMovies(filteredArray);
     }
     return setPreloaderOpen(false);
   }, [arrayMovies, searchText, shortFilter]);
@@ -50,8 +49,10 @@ export const Movies = ({ login, onClickSaveMovie }) => {
     <>
       <Header login={login} />
       <main className='movies'>
-        <SearchForm requestArray={requestArray} />
-        {message && <NotFound type={'notFound'} />}
+        <SearchForm
+          requestArray={requestArray}
+          openPopupsMessage={openPopupsMessage}
+        />
         {preloaderOpen ? (
           <Preloader />
         ) : (

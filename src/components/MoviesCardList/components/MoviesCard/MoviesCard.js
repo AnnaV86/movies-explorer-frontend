@@ -4,11 +4,8 @@ import './MoviesCard.css';
 export const MoviesCard = ({ movie, type, onClickButtonMovie }) => {
   const CurrentMoviesSave = useContext(CurrentMoviesSaveContext);
   const { nameRU, duration, image } = movie;
-  console.log('CurrentMoviesSave in card', CurrentMoviesSave);
   const movieData = CurrentMoviesSave.filter((el) => el.movieId === movie.id);
   const isSave = movieData.length > 0;
-
-  console.log('movieData', movieData);
 
   const getTimeFromMins = (mins) => {
     let hours = Math.trunc(mins / 60);
@@ -17,7 +14,8 @@ export const MoviesCard = ({ movie, type, onClickButtonMovie }) => {
   };
 
   const duretionHour = getTimeFromMins(duration);
-  const imageMovie = `https://api.nomoreparties.co${image.url}`;
+  const imageMovie =
+    type === 'all' ? `https://api.nomoreparties.co${image.url}` : movie.image;
 
   return (
     <section className='movie-card'>
@@ -46,7 +44,7 @@ export const MoviesCard = ({ movie, type, onClickButtonMovie }) => {
           <button
             type='button'
             className='movie__button movie__button_type_close'
-            onClick={() => onClickButtonMovie(movieData[0]._id)}
+            onClick={() => onClickButtonMovie(movie._id)}
           ></button>
         )}
       </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
@@ -19,6 +19,7 @@ import {
 } from '../../utils/MainApi';
 import { signupFetch, signinFetch, validJWTFetch } from '../../utils/auth';
 import { CurrentMoviesSaveContext } from '../../contexts/CurrentMoviesSaveContext';
+import { InfoToolTip } from '../InfoToolTip/InfoToolTip';
 
 export const App = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ export const App = () => {
   const [messageAcceptAuth, setMessageAcceptAuth] = useState('');
   const [isAccept, setIsAccept] = useState(true);
   const [login, setLogin] = useState(false);
+  const [isInfoTooltipOpen, setInfoTooltip] = useState(false);
 
   // Регистрация
   const onRegister = async (userData) => {
@@ -39,11 +41,14 @@ export const App = () => {
       setIsAccept(true);
       setMessageAcceptAuth('Вы успешно зарегистрировались!');
       onLogin(userData);
+      setInfoTooltip(true);
     }
     if (response.message === '409') {
       setMessageAcceptAuth('Пользователем с данным email уже зарегистрирован');
+      setInfoTooltip(true);
     } else {
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
+      setInfoTooltip(true);
     }
     setIsAccept(false);
   };
@@ -87,7 +92,6 @@ export const App = () => {
     const response = await updateUserData(userDataNew);
 
     if (response._id) {
-      console.log('222');
       setIsAccept(false);
       setMessageAcceptAuth('Данные успешно изменены!');
       setCurrentUser(userDataNew);
@@ -104,22 +108,16 @@ export const App = () => {
 
   // Удаление фильма из сохраненных по id
   const onClickDeleteMovie = async (id) => {
-    console.log('все гут, я тут');
     const response = await deleteSaveMovies(id);
-    console.log('response>>>', response);
     if (response.message === 'Фильм удалён') {
-      console.log('удаление');
       setCurrentMovies((prev) => prev.filter((el) => el._id !== id));
     } else {
       setIsAccept(false);
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
     }
   };
-
-  console.log('currentMovies in App', currentMovies);
   // Сохранение фильма по id
   const onClickSaveMovie = async (movie, status, id) => {
-    console.log(movie);
     if (status === 'delete') {
       onClickDeleteMovie(id);
       return;
@@ -137,9 +135,19 @@ export const App = () => {
     if (response._id) {
       setCurrentMovies((prev) => [...prev, response]);
     } else {
-      setIsAccept(false);
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
+      setInfoTooltip(true);
     }
+  };
+
+  const closePopupsMessage = () => {
+    setInfoTooltip(false);
+    setMessageAcceptAuth('');
+  };
+
+  const openPopupsMessage = (message) => {
+    setInfoTooltip(true);
+    setMessageAcceptAuth(message);
   };
 
   useEffect(() => {
@@ -177,7 +185,11 @@ export const App = () => {
               <Route
                 path='/movies'
                 element={
-                  <Movies login={login} onClickSaveMovie={onClickSaveMovie} />
+                  <Movies
+                    login={login}
+                    onClickSaveMovie={onClickSaveMovie}
+                    openPopupsMessage={openPopupsMessage}
+                  />
                 }
               />
               <Route
@@ -186,6 +198,7 @@ export const App = () => {
                   <SavedMovies
                     login={login}
                     onClickDeleteMovie={onClickDeleteMovie}
+                    openPopupsMessage={openPopupsMessage}
                   />
                 }
               />
@@ -223,6 +236,12 @@ export const App = () => {
               />
               <Route path='*' element={<PageNotFound />} />
             </Routes>
+            <InfoToolTip
+              isOpen={isInfoTooltipOpen}
+              onClose={closePopupsMessage}
+              isAccept={isAccept}
+              messageAcceptAuth={messageAcceptAuth}
+            />
           </div>
         }
       </CurrentMoviesSaveContext.Provider>

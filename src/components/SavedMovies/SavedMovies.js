@@ -6,33 +6,57 @@ import './SavedMovies.css';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import { CurrentMoviesSaveContext } from '../../contexts/CurrentMoviesSaveContext';
-import { NotFound } from '../NotFound/NotFound';
-export const SavedMovies = ({ login, onClickDeleteMovie }) => {
+import { NOT_FOUND_MESSAGE } from '../../constants/index';
+export const SavedMovies = ({
+  login,
+  onClickDeleteMovie,
+  openPopupsMessage,
+}) => {
   const currentMovies = useContext(CurrentMoviesSaveContext);
   const [preloaderOpen, setPreloaderOpen] = useState(false);
-  const [message, setMessage] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [shortFilter, setShortFilter] = useState(false);
+  const [filteredArrayMovies, setFilteredArrayMovies] = useState(currentMovies);
+
+  const requestArray = (searchData) => {
+    setSearchText(searchData.text);
+    return setShortFilter(searchData.short);
+  };
 
   useEffect(() => {
-    setPreloaderOpen(true);
-    if (currentMovies.length === 0) {
-      setMessage('Ничего не найдено');
+    const filteredArray = currentMovies.filter(
+      (movie) => movie.nameRU.indexOf(searchText) >= 0
+    );
+    if (shortFilter) {
+      const shortArray = filteredArray.filter((movie) => movie.duration < 41);
+      if (shortArray.length === 0) {
+        openPopupsMessage(NOT_FOUND_MESSAGE);
+      } else {
+        setFilteredArrayMovies(shortArray);
+      }
+    } else {
+      if (filteredArray.length === 0) {
+        openPopupsMessage(NOT_FOUND_MESSAGE);
+      } else setFilteredArrayMovies(filteredArray);
     }
-    setPreloaderOpen(false);
-  }, [currentMovies]);
+    return setPreloaderOpen(false);
+  }, [currentMovies, searchText, shortFilter]);
 
   return (
     <>
       <Header login={login} />
       <main className='movies'>
-        <SearchForm />
-        {message && <NotFound type={'notFound'} />}
+        <SearchForm
+          requestArray={requestArray}
+          openPopupsMessage={openPopupsMessage}
+        />
         {preloaderOpen ? (
           <Preloader />
         ) : (
           currentMovies.length > 0 && (
             <>
               <MoviesCardList
-                arreyMovie={currentMovies}
+                arrayMovie={filteredArrayMovies}
                 type={'save'}
                 onClickButtonMovie={onClickDeleteMovie}
               />

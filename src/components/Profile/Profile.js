@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { updateUserData } from '../../utils/MainApi';
 import './Profile.css';
-import { userData } from '../../constants/user';
 import { Header } from '../Header/Header';
 
 export const Profile = ({
@@ -25,7 +23,6 @@ export const Profile = ({
   const classSaveButton = classNames(`profile__save-button`, {
     'profile__save-button_disable': !isAccept,
   });
-  console.log(isAccept);
   useEffect(() => {
     setUserDataUpdate({ name: currentUser.name, email: currentUser.email });
   }, [currentUser]);

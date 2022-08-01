@@ -41,8 +41,6 @@ export const Form = ({
     }));
   };
 
-  console.log(type);
-
   const enterRegistration = (e) => {
     if (type === 'signin' && (!userData.password || !userData.email)) {
       return;

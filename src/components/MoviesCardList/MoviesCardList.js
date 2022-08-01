@@ -53,7 +53,7 @@ export const MoviesCardList = ({ arrayMovie, type, onClickButtonMovie }) => {
               return (
                 <MoviesCard
                   movie={movie}
-                  key={movie.id}
+                  key={movie._id}
                   type={type}
                   onClickButtonMovie={onClickButtonMovie}
                 />
