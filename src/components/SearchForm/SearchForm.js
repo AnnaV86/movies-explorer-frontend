@@ -23,10 +23,11 @@ export const SearchForm = ({
   };
 
   const handleShort = () => {
-    setValue((prev) => ({
-      ...prev,
-      short: value.short === 'off' ? 'on' : 'off',
-    }));
+    if (value)
+      setValue((prev) => ({
+        ...prev,
+        short: value.short === 'off' ? 'on' : 'off',
+      }));
     setTumbler(!tumbler);
   };
 

@@ -95,7 +95,7 @@ export const Form = ({
                 required
                 pattern='^[A-Za-zА-Яа-яЁё /s -]+$'
                 minLength={2}
-                maxLength={100}
+                maxLength={30}
                 value={userData.name}
                 onChange={handleChange}
               />
@@ -111,6 +111,7 @@ export const Form = ({
               className={classErrorEmail}
               name='email'
               required
+              pattern='^[^ ]+@[^ ]+\.[a-z]{3}$'
               value={userData.email}
               onChange={handleChange}
             />
