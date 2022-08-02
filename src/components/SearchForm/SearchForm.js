@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './SearchForm.css';
+import classNames from 'classnames';
 export const SearchForm = ({
   onClickRequestArray,
   openPopupsMessage,
@@ -8,6 +9,10 @@ export const SearchForm = ({
   const [value, setValue] = useState({ text: '', short: 'off' });
   const [tumbler, setTumbler] = useState(false);
   const [messageError, setMessageError] = useState('');
+  const [isValid, setIsValid] = useState(true);
+  const classButton = classNames(`search-form__button`, {
+    'search-form__button_disable': !isValid,
+  });
 
   const handleChange = (evt) => {
     evt.preventDefault();
@@ -34,10 +39,23 @@ export const SearchForm = ({
     if (type === 'allMovies') {
       const searchText = localStorage.getItem('searchText');
       const shortFilter = localStorage.getItem('shortFilter');
-      setValue({ text: searchText, short: shortFilter });
+      if (!searchText && !shortFilter) {
+        setValue({ text: '', short: 'off' });
+        setTumbler(false);
+        return;
+      } else setValue({ text: searchText, short: shortFilter });
       setTumbler(shortFilter === 'on' ? true : false);
+
+      return;
     }
   }, []);
+
+  useEffect(() => {
+    if (!value.text) {
+      return setIsValid(false);
+    }
+    setIsValid(true);
+  }, [value.text]);
 
   return (
     <section className='search'>
@@ -53,9 +71,10 @@ export const SearchForm = ({
             required
           />
           <button
-            className='search-form__button'
+            className={classButton}
             type='button'
             onClick={(e) => onClickSearch(e)}
+            disabled={!isValid}
           ></button>
         </div>
         <label className='checkbox__label'>

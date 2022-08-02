@@ -9,6 +9,7 @@ import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
 import './App.css';
 import { PageNotFound } from '../PageNotFound/PageNotFound';
+import { ProtectedRoute } from '../ProtectedRoute';
 import {
   headers,
   getUserInfo,
@@ -29,6 +30,7 @@ export const App = () => {
   const [isAccept, setIsAccept] = useState(true);
   const [login, setLogin] = useState(false);
   const [isInfoTooltipOpen, setInfoTooltip] = useState(false);
+  let messageClean;
 
   // Регистрация
   const onRegister = async (userData) => {
@@ -40,17 +42,23 @@ export const App = () => {
     if (response._id) {
       setIsAccept(true);
       setMessageAcceptAuth('Вы успешно зарегистрировались!');
-      onLogin(userData);
-      setInfoTooltip(true);
+      setIsAccept(false);
+      messageClean = setTimeout(() => {
+        setIsAccept(true);
+        setMessageAcceptAuth('');
+      }, 5000);
+      return onLogin(userData);
     }
     if (response.message === '409') {
       setMessageAcceptAuth('Пользователем с данным email уже зарегистрирован');
-      setInfoTooltip(true);
     } else {
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
-      setInfoTooltip(true);
     }
     setIsAccept(false);
+    messageClean = setTimeout(() => {
+      setIsAccept(true);
+      setMessageAcceptAuth('');
+    }, 5000);
   };
 
   // Проверка токена
@@ -75,10 +83,18 @@ export const App = () => {
       headers.authorization = `Bearer ${localStorage.getItem('token')}`;
       setLogin(true);
       navigate('/movies');
+    }
+    if (response.message === '401') {
+      setMessageAcceptAuth('Неправильные почта или пароль');
+      setIsAccept(false);
     } else {
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
       setIsAccept(false);
     }
+    messageClean = setTimeout(() => {
+      setIsAccept(true);
+      setMessageAcceptAuth('');
+    }, 5000);
   };
 
   // Выход из аккаунта
@@ -98,15 +114,17 @@ export const App = () => {
       setIsAccept(false);
       setMessageAcceptAuth('Данные успешно изменены!');
       setCurrentUser(userDataNew);
-      return;
-    }
-    if (response.message === '409') {
+    } else if (response.message === '409') {
       setIsAccept(false);
       setMessageAcceptAuth('Пользователем с данным email уже зарегистрирован');
     } else {
       setIsAccept(false);
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
     }
+    messageClean = setTimeout(() => {
+      setIsAccept(true);
+      setMessageAcceptAuth('');
+    }, 5000);
   };
 
   // Удаление фильма из сохраненных по id
@@ -119,6 +137,7 @@ export const App = () => {
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
     }
   };
+
   // Сохранение фильма по id
   const onClickSaveMovie = async (movie, status, id) => {
     if (status === 'delete') {
@@ -137,6 +156,11 @@ export const App = () => {
     const response = await addSaveMovies(movieNew);
     if (response._id) {
       setCurrentMovies((prev) => [...prev, response]);
+    } else if (response.message === '400') {
+      setMessageAcceptAuth(
+        'Что-то пошло не так! Данный фильм не может быть сохранён'
+      );
+      setInfoTooltip(true);
     } else {
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
       setInfoTooltip(true);
@@ -171,6 +195,8 @@ export const App = () => {
         setCurrentMovies(cards);
       })();
     }
+
+    return clearTimeout(messageClean);
   }, [login, navigate]);
 
   useEffect(() => {
@@ -188,33 +214,39 @@ export const App = () => {
               <Route
                 path='/movies'
                 element={
-                  <Movies
-                    login={login}
-                    onClickSaveMovie={onClickSaveMovie}
-                    openPopupsMessage={openPopupsMessage}
-                  />
+                  <ProtectedRoute login={login}>
+                    <Movies
+                      login={login}
+                      onClickSaveMovie={onClickSaveMovie}
+                      openPopupsMessage={openPopupsMessage}
+                    />
+                  </ProtectedRoute>
                 }
               />
               <Route
                 path='/saved-movies'
                 element={
-                  <SavedMovies
-                    login={login}
-                    onClickDeleteMovie={onClickDeleteMovie}
-                    openPopupsMessage={openPopupsMessage}
-                  />
+                  <ProtectedRoute login={login}>
+                    <SavedMovies
+                      login={login}
+                      onClickDeleteMovie={onClickDeleteMovie}
+                      openPopupsMessage={openPopupsMessage}
+                    />
+                  </ProtectedRoute>
                 }
               />
               <Route
                 path='/profile'
                 element={
-                  <Profile
-                    onSignOut={onSignOut}
-                    login={login}
-                    onClickUpdateProfile={onClickUpdateProfile}
-                    messageAccept={messageAcceptAuth}
-                    isAccept={isAccept}
-                  />
+                  <ProtectedRoute login={login}>
+                    <Profile
+                      onSignOut={onSignOut}
+                      login={login}
+                      onClickUpdateProfile={onClickUpdateProfile}
+                      messageAccept={messageAcceptAuth}
+                      isAccept={isAccept}
+                    />
+                  </ProtectedRoute>
                 }
               />
               <Route

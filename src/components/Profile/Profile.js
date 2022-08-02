@@ -20,8 +20,10 @@ export const Profile = ({
     name: '',
     email: '',
   });
+  const [isValidForm, setIsValidForm] = useState(true);
   const classSaveButton = classNames(`profile__save-button`, {
-    'profile__save-button_disable': !isAccept,
+    'profile__save-button_disable': !isValidForm,
+    'profile__save-button_disable profile__save-button_span-text': !isAccept,
   });
   useEffect(() => {
     setUserDataUpdate({ name: currentUser.name, email: currentUser.email });
@@ -37,18 +39,30 @@ export const Profile = ({
   };
 
   const enterUpdateProfile = (e) => {
-    if (messageError.name || messageError.email) {
+    if (messageError.name && messageError.email) {
       return;
     }
     e.preventDefault();
     onClickUpdateProfile(userDataUpdate);
   };
 
+  useEffect(() => {
+    if (messageError.name || messageError.email) {
+      return setIsValidForm(false);
+    } else if (
+      currentUser.name === userDataUpdate.name &&
+      currentUser.email === userDataUpdate.email
+    ) {
+      return setIsValidForm(false);
+    }
+    setIsValidForm(true);
+  }, [messageError, userDataUpdate, currentUser]);
+
   return (
     <>
       <Header login={login} />
       <main className='profile'>
-        <h1 className='profile__title'>{`Привет, ${userDataUpdate.name}!`}</h1>
+        <h1 className='profile__title'>{`Привет, ${currentUser.name}!`}</h1>
         <form className='profile__form'>
           <fieldset className='profile__fieldset'>
             <label className='profile__label'>Имя</label>
@@ -92,7 +106,7 @@ export const Profile = ({
             <button
               type='submit'
               className={classSaveButton}
-              disabled={!isAccept}
+              disabled={!isValidForm}
               onClick={enterUpdateProfile}
             >
               Сохранить

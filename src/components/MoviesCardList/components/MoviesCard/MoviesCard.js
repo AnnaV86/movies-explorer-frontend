@@ -48,7 +48,14 @@ export const MoviesCard = ({ movie, type, onClickButtonMovie }) => {
           ></button>
         )}
       </div>
-      <img className='movie__image' src={imageMovie} alt={nameRU} />
+      <a
+        className='link__trailer'
+        href={movie.trailerLink}
+        target={'_blank'}
+        rel='noopener noreferrer'
+      >
+        <img className='movie__image' src={imageMovie} alt={nameRU} />
+      </a>
     </section>
   );
 };

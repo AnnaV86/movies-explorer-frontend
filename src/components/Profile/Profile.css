@@ -82,10 +82,13 @@
 }
 
 .profile__save-button_disable {
-  margin-top: 20px;
   background-color: #f8f8f8;
   color: #c2c2c2;
   cursor: default;
+}
+
+.profile__save-button_span-text {
+  margin-top: 23px;
 }
 
 .profile_save_button:hover {

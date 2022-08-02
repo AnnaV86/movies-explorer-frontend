@@ -1,7 +1,7 @@
 import './Form.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 export const Form = ({
   title,
@@ -22,6 +22,8 @@ export const Form = ({
     email: '',
     password: '',
   });
+
+  const [isValidForm, setIsValidForm] = useState(false);
   const classErrorName = classNames(`form__input`, {
     error: messageError.name,
   });
@@ -30,6 +32,10 @@ export const Form = ({
   });
   const classErrorPassword = classNames(`form__input`, {
     error: messageError.password,
+  });
+  const classSaveButton = classNames(`form__button`, {
+    form__button_disable: !isValidForm,
+    'form__button_disable form__button_span-text': !isAccept,
   });
 
   const handleChange = (evt) => {
@@ -42,6 +48,7 @@ export const Form = ({
   };
 
   const enterRegistration = (e) => {
+    console.log('отправляю форму');
     if (type === 'signin' && (!userData.password || !userData.email)) {
       return;
     } else if (
@@ -53,6 +60,23 @@ export const Form = ({
       return onClick(userData);
     }
   };
+
+  useEffect(() => {
+    if (type === 'signup') {
+      if (messageError.name || messageError.email || messageError.password) {
+        return setIsValidForm(false);
+      } else if (!userData.name || !userData.password || !userData.email) {
+        return setIsValidForm(false);
+      }
+    } else if (type === 'signin') {
+      if (messageError.email || messageError.password) {
+        return setIsValidForm(false);
+      } else if (!userData.password || !userData.email) {
+        return setIsValidForm(false);
+      }
+    }
+    setIsValidForm(true);
+  }, [messageError]);
 
   return (
     <section className='form-enter'>
@@ -114,8 +138,9 @@ export const Form = ({
         {!isAccept && <span className='form__error'>{messageAccept}</span>}
         <button
           type='button'
-          className='form__button'
+          className={classSaveButton}
           onClick={enterRegistration}
+          disabled={!isValidForm}
         >
           {button}
         </button>

@@ -11,6 +11,7 @@ import { filterArray } from '../../utils/filterArray';
 export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const [filteredArrayMovies, setFilteredArrayMovies] = useState([]);
+  const [isRender, setIsRender] = useState(true);
 
   const onClickRequestArray = async (searchData) => {
     setPreloaderOpen(true);
@@ -31,11 +32,18 @@ export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
     } else {
       setFilteredArrayMovies(array);
     }
+    setIsRender(true);
     return setPreloaderOpen(false);
   };
 
   useEffect(() => {
+    const arrayAllMovies = localStorage.getItem('arrayAllMovies');
+    if (!arrayAllMovies) {
+      setIsRender(false);
+      return;
+    }
     const arraySearch = filterArray();
+    setIsRender(true);
     renderArray(arraySearch);
   }, []);
 
@@ -51,11 +59,13 @@ export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
         {preloaderOpen ? (
           <Preloader />
         ) : (
-          <MoviesCardList
-            arrayMovie={filteredArrayMovies}
-            type={'all'}
-            onClickButtonMovie={onClickSaveMovie}
-          />
+          isRender && (
+            <MoviesCardList
+              arrayMovie={filteredArrayMovies}
+              type={'all'}
+              onClickButtonMovie={onClickSaveMovie}
+            />
+          )
         )}
       </main>
       <Footer />

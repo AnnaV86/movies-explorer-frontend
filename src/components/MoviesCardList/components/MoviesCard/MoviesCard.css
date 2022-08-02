@@ -64,6 +64,16 @@
   background-image: url(../../../../images/close.svg);
 }
 
+.link__trailer {
+  width: 364px;
+  height: 203px;
+  cursor: pointer;
+}
+
+.link__trailer:hover {
+  opacity: 0.8;
+}
+
 .movie__image {
   width: 364px;
   height: 203px;
