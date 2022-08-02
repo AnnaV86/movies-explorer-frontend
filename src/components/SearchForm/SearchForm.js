@@ -1,7 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './SearchForm.css';
-export const SearchForm = ({ requestArray, openPopupsMessage }) => {
-  const [value, setValue] = useState({ text: '', short: false });
+export const SearchForm = ({
+  onClickRequestArray,
+  openPopupsMessage,
+  type,
+}) => {
+  const [value, setValue] = useState({ text: '', short: 'off' });
+  const [tumbler, setTumbler] = useState(false);
   const [messageError, setMessageError] = useState('');
 
   const handleChange = (evt) => {
@@ -12,14 +17,27 @@ export const SearchForm = ({ requestArray, openPopupsMessage }) => {
   };
 
   const handleShort = () => {
-    setValue((prev) => ({ ...prev, short: !value.short }));
+    setValue((prev) => ({
+      ...prev,
+      short: value.short === 'off' ? 'on' : 'off',
+    }));
+    setTumbler(!tumbler);
   };
 
   const onClickSearch = () => {
     if (messageError) {
-      return openPopupsMessage('Пожалуйста, заполните форму поиска');
-    } else return requestArray(value);
+      return openPopupsMessage('Нужно ввести ключевое слово');
+    } else return onClickRequestArray(value);
   };
+
+  useEffect(() => {
+    if (type === 'allMovies') {
+      const searchText = localStorage.getItem('searchText');
+      const shortFilter = localStorage.getItem('shortFilter');
+      setValue({ text: searchText, short: shortFilter });
+      setTumbler(shortFilter === 'on' ? true : false);
+    }
+  }, []);
 
   return (
     <section className='search'>
@@ -44,9 +62,10 @@ export const SearchForm = ({ requestArray, openPopupsMessage }) => {
           <input
             className='checkbox'
             type='checkbox'
-            value={true}
+            value={value.short}
             name='short'
-            onClick={handleShort}
+            checked={tumbler}
+            onChange={handleShort}
           />
           <span className='checkbox__pseudo'></span>
           Короткометражки

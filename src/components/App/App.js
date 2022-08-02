@@ -84,6 +84,9 @@ export const App = () => {
   // Выход из аккаунта
   const onSignOut = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('arrayAllMovies');
+    localStorage.removeItem('searchText');
+    localStorage.removeItem('shortFilter');
     setLogin(false);
   };
 

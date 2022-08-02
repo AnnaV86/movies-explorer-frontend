@@ -6,52 +6,47 @@ import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
 import { Header } from '../Header/Header';
 import { getMoviesListFetch } from '../../utils/MoviesApi';
-import { NOT_FOUND_MESSAGE, ERROR_SERVER_MESSAGE } from '../../constants/index';
+import { NOT_FOUND_MESSAGE } from '../../constants/index';
+import { filterArray } from '../../utils/filterArray';
 export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
   const [preloaderOpen, setPreloaderOpen] = useState(false);
-  const [arrayMovies, setArrayMovies] = useState([]);
-  const [searchText, setSearchText] = useState('');
   const [filteredArrayMovies, setFilteredArrayMovies] = useState([]);
-  const [shortFilter, setShortFilter] = useState(false);
 
-  const requestArray = async (searchData) => {
-    if (arrayMovies.length === 0) {
-      setPreloaderOpen(true);
+  const onClickRequestArray = async (searchData) => {
+    setPreloaderOpen(true);
+    const arrayAllMovies = localStorage.getItem('arrayAllMovies');
+    if (!arrayAllMovies) {
       const allMovies = await getMoviesListFetch();
-      setArrayMovies(allMovies);
+      localStorage.setItem('arrayAllMovies', JSON.stringify(allMovies));
     }
-    setSearchText(searchData.text);
-    return setShortFilter(searchData.short);
+    localStorage.setItem('searchText', searchData.text);
+    localStorage.setItem('shortFilter', searchData.short);
+    const arraySearch = filterArray();
+    return renderArray(arraySearch);
+  };
+
+  const renderArray = (array) => {
+    if (array.length === 0) {
+      openPopupsMessage(NOT_FOUND_MESSAGE);
+    } else {
+      setFilteredArrayMovies(array);
+    }
+    return setPreloaderOpen(false);
   };
 
   useEffect(() => {
-    const filteredArray = arrayMovies.filter(
-      (movie) => movie.nameRU.indexOf(searchText) >= 0
-    );
-    if (shortFilter) {
-      const shortArray = filteredArray.filter((movie) => movie.duration < 41);
-      if (arrayMovies.length > 0 && shortArray.length === 0) {
-        console.log('это я');
-        openPopupsMessage(NOT_FOUND_MESSAGE);
-      } else {
-        setFilteredArrayMovies(shortArray);
-      }
-    } else {
-      if (arrayMovies.length > 0 && filteredArray.length === 0) {
-        console.log('а это я');
-        openPopupsMessage(NOT_FOUND_MESSAGE);
-      } else setFilteredArrayMovies(filteredArray);
-    }
-    return setPreloaderOpen(false);
-  }, [arrayMovies, searchText, shortFilter]);
+    const arraySearch = filterArray();
+    renderArray(arraySearch);
+  }, []);
 
   return (
     <>
       <Header login={login} />
       <main className='movies'>
         <SearchForm
-          requestArray={requestArray}
+          onClickRequestArray={onClickRequestArray}
           openPopupsMessage={openPopupsMessage}
+          type={'allMovies'}
         />
         {preloaderOpen ? (
           <Preloader />
