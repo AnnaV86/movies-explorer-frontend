@@ -1,0 +1,176 @@
+.about-project {
+  padding: 110px 70px;
+  box-sizing: border-box;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #000;
+}
+
+.text__list {
+  padding: 0;
+  margin: 0;
+  padding-top: 70px;
+  display: flex;
+}
+
+.text__item {
+  list-style: none;
+}
+
+.text__item:nth-child(2) {
+  padding-left: 52px;
+}
+
+.text__title {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.text__paragraph {
+  margin: 0;
+  margin-top: 26px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.week__container {
+  margin-top: 110px;
+  display: flex;
+}
+
+.week__item {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.week__item_back {
+  width: 20%;
+}
+
+.week__item_front {
+  width: 80%;
+}
+
+.week__item-duration {
+  margin: 0;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.week__item-duration_one {
+  background-color: #2be080;
+}
+
+.week__item-duration_four {
+  background-color: #f2f2f2;
+}
+
+.week__title {
+  margin: 0;
+  margin-top: 14px;
+  color: #a0a0a0;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .text__item:nth-child(2) {
+    padding-left: 33px;
+  }
+
+  .text__paragraph {
+    margin-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .week__container {
+    margin-top: 93px;
+  }
+
+  .week__item_back {
+    width: 20.9%;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+  }
+
+  .text__list {
+    padding-top: 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .text__item {
+    margin-right: 0;
+    margin-bottom: 56px;
+  }
+
+  .text__item:nth-child(2) {
+    padding-left: 0;
+  }
+
+  .text__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .text__paragraph {
+    margin-top: 16px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .week__container {
+    margin-top: 4px;
+  }
+
+  .week__item {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .week__item_back {
+    width: 35%;
+  }
+
+  .week__item_front {
+    width: 65%;
+  }
+
+  .week__title {
+    margin-top: 8px;
+  }
+}
