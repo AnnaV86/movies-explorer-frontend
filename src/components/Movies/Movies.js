@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Footer } from '../Footer/Footer';
 import { Preloader } from '../Preloader/Preloader';
 import { SearchForm } from '../SearchForm/SearchForm';
@@ -6,7 +6,7 @@ import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
 import { Header } from '../Header/Header';
 import { getMoviesListFetch } from '../../utils/MoviesApi';
-import { NOT_FOUND_MESSAGE } from '../../constants/index';
+import { NOT_FOUND_MESSAGE, ERROR_SERVER_MESSAGE } from '../../constants/index';
 import { filterArray } from '../../utils/filterArray';
 export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
   const [preloaderOpen, setPreloaderOpen] = useState(false);
@@ -18,23 +18,30 @@ export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
     const arrayAllMovies = localStorage.getItem('arrayAllMovies');
     if (!arrayAllMovies) {
       const allMovies = await getMoviesListFetch();
-      localStorage.setItem('arrayAllMovies', JSON.stringify(allMovies));
+      if (allMovies) {
+        localStorage.setItem('arrayAllMovies', JSON.stringify(allMovies));
+      } else {
+        openPopupsMessage(ERROR_SERVER_MESSAGE);
+      }
     }
-    localStorage.setItem('searchText', searchData.text);
+    localStorage.setItem('searchText', searchData.text.toLowerCase());
     localStorage.setItem('shortFilter', searchData.short);
     const arraySearch = filterArray();
     return renderArray(arraySearch);
   };
 
-  const renderArray = (array) => {
-    if (array.length === 0) {
-      openPopupsMessage(NOT_FOUND_MESSAGE);
-    } else {
-      setFilteredArrayMovies(array);
-    }
-    setIsRender(true);
-    return setPreloaderOpen(false);
-  };
+  const renderArray = useCallback(
+    (array) => {
+      if (array.length === 0) {
+        openPopupsMessage(NOT_FOUND_MESSAGE);
+      } else {
+        setFilteredArrayMovies(array);
+      }
+      setIsRender(true);
+      return setPreloaderOpen(false);
+    },
+    [openPopupsMessage]
+  );
 
   useEffect(() => {
     const arrayAllMovies = localStorage.getItem('arrayAllMovies');
@@ -45,7 +52,7 @@ export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
     const arraySearch = filterArray();
     setIsRender(true);
     renderArray(arraySearch);
-  }, []);
+  }, [renderArray]);
 
   return (
     <>

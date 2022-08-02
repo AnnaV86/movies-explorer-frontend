@@ -48,7 +48,6 @@ export const Form = ({
   };
 
   const enterRegistration = (e) => {
-    console.log('отправляю форму');
     if (type === 'signin' && (!userData.password || !userData.email)) {
       return;
     } else if (
@@ -76,7 +75,7 @@ export const Form = ({
       }
     }
     setIsValidForm(true);
-  }, [messageError]);
+  }, [messageError, userData, type]);
 
   return (
     <section className='form-enter'>

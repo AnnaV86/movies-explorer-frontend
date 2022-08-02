@@ -21,7 +21,7 @@ export const SavedMovies = ({
     setPreloaderOpen(true);
     const arraySearch = filterSaveArray(
       currentMovies,
-      searchData.text,
+      searchData.text.toLowerCase(),
       searchData.short
     );
     return renderArray(arraySearch);

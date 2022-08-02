@@ -48,7 +48,7 @@ export const SearchForm = ({
 
       return;
     }
-  }, []);
+  }, [type]);
 
   useEffect(() => {
     if (!value.text) {

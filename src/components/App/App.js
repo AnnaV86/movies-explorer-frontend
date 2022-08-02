@@ -21,6 +21,15 @@ import {
 import { signupFetch, signinFetch, validJWTFetch } from '../../utils/auth';
 import { CurrentMoviesSaveContext } from '../../contexts/CurrentMoviesSaveContext';
 import { InfoToolTip } from '../InfoToolTip/InfoToolTip';
+import {
+  REGISTRATION_MESSAGE,
+  CONFLICT_ERROR,
+  ERROR_SERVER_MESSAGE_SHORT,
+  ERROR_MESSAGE_EMAIL_PASSWORD,
+  UPDATE_DATA_MESSAGE,
+  DELETE_MOVIE_MESSAGE,
+  ERROR_MOVIES_VALID_DATA_MESSAGE,
+} from '../../constants';
 
 export const App = () => {
   const navigate = useNavigate();
@@ -41,7 +50,7 @@ export const App = () => {
 
     if (response._id) {
       setIsAccept(true);
-      setMessageAcceptAuth('Вы успешно зарегистрировались!');
+      setMessageAcceptAuth(REGISTRATION_MESSAGE);
       setIsAccept(false);
       messageClean = setTimeout(() => {
         setIsAccept(true);
@@ -50,9 +59,9 @@ export const App = () => {
       return onLogin(userData);
     }
     if (response.message === '409') {
-      setMessageAcceptAuth('Пользователем с данным email уже зарегистрирован');
+      setMessageAcceptAuth(CONFLICT_ERROR);
     } else {
-      setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
+      setMessageAcceptAuth(ERROR_SERVER_MESSAGE_SHORT);
     }
     setIsAccept(false);
     messageClean = setTimeout(() => {
@@ -85,10 +94,10 @@ export const App = () => {
       navigate('/movies');
     }
     if (response.message === '401') {
-      setMessageAcceptAuth('Неправильные почта или пароль');
+      setMessageAcceptAuth(ERROR_MESSAGE_EMAIL_PASSWORD);
       setIsAccept(false);
     } else {
-      setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
+      setMessageAcceptAuth(ERROR_SERVER_MESSAGE_SHORT);
       setIsAccept(false);
     }
     messageClean = setTimeout(() => {
@@ -112,14 +121,14 @@ export const App = () => {
 
     if (response._id) {
       setIsAccept(false);
-      setMessageAcceptAuth('Данные успешно изменены!');
+      setMessageAcceptAuth(UPDATE_DATA_MESSAGE);
       setCurrentUser(userDataNew);
     } else if (response.message === '409') {
       setIsAccept(false);
-      setMessageAcceptAuth('Пользователем с данным email уже зарегистрирован');
+      setMessageAcceptAuth(CONFLICT_ERROR);
     } else {
       setIsAccept(false);
-      setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
+      setMessageAcceptAuth(ERROR_SERVER_MESSAGE_SHORT);
     }
     messageClean = setTimeout(() => {
       setIsAccept(true);
@@ -130,11 +139,11 @@ export const App = () => {
   // Удаление фильма из сохраненных по id
   const onClickDeleteMovie = async (id) => {
     const response = await deleteSaveMovies(id);
-    if (response.message === 'Фильм удалён') {
+    if (response.message === DELETE_MOVIE_MESSAGE) {
       setCurrentMovies((prev) => prev.filter((el) => el._id !== id));
     } else {
       setIsAccept(false);
-      setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
+      setMessageAcceptAuth(ERROR_SERVER_MESSAGE_SHORT);
     }
   };
 
@@ -157,12 +166,10 @@ export const App = () => {
     if (response._id) {
       setCurrentMovies((prev) => [...prev, response]);
     } else if (response.message === '400') {
-      setMessageAcceptAuth(
-        'Что-то пошло не так! Данный фильм не может быть сохранён'
-      );
+      setMessageAcceptAuth(ERROR_MOVIES_VALID_DATA_MESSAGE);
       setInfoTooltip(true);
     } else {
-      setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
+      setMessageAcceptAuth(ERROR_SERVER_MESSAGE_SHORT);
       setInfoTooltip(true);
     }
   };
@@ -197,7 +204,7 @@ export const App = () => {
     }
 
     return clearTimeout(messageClean);
-  }, [login, navigate]);
+  }, [login, messageClean]);
 
   useEffect(() => {
     setIsAccept(true);

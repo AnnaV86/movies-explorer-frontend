@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+import { BASE_URL } from '../constants/index';
 
 // Обработка ответа от сервера
 const getResponse = (response) => {

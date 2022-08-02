@@ -1,4 +1,4 @@
-const BASE_URL_MAIN = 'https://api.vidmovies.students.nomoredomains.xyz';
+import { BASE_URL_MAIN } from '../constants/index';
 
 // Обработка ответа от сервера
 const getResponse = (response) => {

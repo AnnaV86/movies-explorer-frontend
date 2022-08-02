@@ -4,7 +4,7 @@ import './InfoToolTip.css';
 
 export const InfoToolTip = ({ isOpen, onClose, messageAcceptAuth }) => {
   const classPopup = classNames(`popup`, {
-    ['popup_opened']: isOpen,
+    popup_opened: isOpen,
   });
 
   const handleMouseDown = (e) => {
