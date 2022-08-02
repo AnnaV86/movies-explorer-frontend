@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './SearchForm.css';
 import classNames from 'classnames';
+import { ENTER_WORD_MESSAGE } from '../../constants';
 export const SearchForm = ({
   onClickRequestArray,
   openPopupsMessage,
@@ -31,7 +32,7 @@ export const SearchForm = ({
 
   const onClickSearch = () => {
     if (messageError) {
-      return openPopupsMessage('Нужно ввести ключевое слово');
+      return openPopupsMessage(ENTER_WORD_MESSAGE);
     } else return onClickRequestArray(value);
   };
 

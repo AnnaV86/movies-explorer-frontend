@@ -10,6 +10,7 @@ export const ERROR_SERVER_MESSAGE_SHORT =
 export const ERROR_MESSAGE_EMAIL_PASSWORD = 'Неправильные почта или пароль';
 export const ERROR_MOVIES_VALID_DATA_MESSAGE =
   'Что-то пошло не так! Данный фильм не может быть сохранён';
+	export const ENTER_WORD_MESSAGE = 'Нужно ввести ключевое слово'
 
 // Сообщения об успехе операции
 export const REGISTRATION_MESSAGE = 'Вы успешно зарегистрировались!';
