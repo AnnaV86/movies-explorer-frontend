@@ -180,10 +180,9 @@ export const App = () => {
   };
 
   const openPopupsMessage = (message) => {
-    setInfoTooltip(true);
     setMessageAcceptAuth(message);
+    setInfoTooltip(true);
   };
-
   useEffect(() => {
     (async () => {
       const response = await tokenCheck();
@@ -208,7 +207,6 @@ export const App = () => {
 
   useEffect(() => {
     setIsAccept(true);
-    setMessageAcceptAuth('');
   }, [navigate]);
 
   return (

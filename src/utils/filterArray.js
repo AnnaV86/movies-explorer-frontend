@@ -4,7 +4,7 @@ export const filterArray = () => {
   const shortFilter = localStorage.getItem('shortFilter');
 
   const filteredArray = arrayAllMovies.filter(
-    (movie) => movie.nameRU.indexOf(searchText) >= 0
+    (movie) => movie.nameRU.toLowerCase().indexOf(searchText) >= 0
   );
   if (shortFilter === 'on') {
     const shortArray = filteredArray.filter((movie) => movie.duration < 41);

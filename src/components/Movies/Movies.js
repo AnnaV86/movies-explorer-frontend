@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Footer } from '../Footer/Footer';
 import { Preloader } from '../Preloader/Preloader';
 import { SearchForm } from '../SearchForm/SearchForm';
@@ -30,18 +30,15 @@ export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
     return renderArray(arraySearch);
   };
 
-  const renderArray = useCallback(
-    (array) => {
-      if (array.length === 0) {
-        openPopupsMessage(NOT_FOUND_MESSAGE);
-      } else {
-        setFilteredArrayMovies(array);
-      }
-      setIsRender(true);
-      return setPreloaderOpen(false);
-    },
-    [openPopupsMessage]
-  );
+  const renderArray = (array) => {
+    if (array.length === 0) {
+      openPopupsMessage(NOT_FOUND_MESSAGE);
+    } else {
+      setFilteredArrayMovies(array);
+    }
+    setIsRender(true);
+    return setPreloaderOpen(false);
+  };
 
   useEffect(() => {
     const arrayAllMovies = localStorage.getItem('arrayAllMovies');
@@ -52,7 +49,8 @@ export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
     const arraySearch = filterArray();
     setIsRender(true);
     renderArray(arraySearch);
-  }, [renderArray]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
