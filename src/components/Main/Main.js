@@ -8,7 +8,6 @@ import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 
 export const Main = ({ login }) => {
-  console.log('я в Main');
   return (
     <>
       <Header login={login} />

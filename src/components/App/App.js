@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Main from '../Main/Main';
 import { Movies } from '../Movies/Movies';
@@ -182,12 +182,9 @@ export const App = () => {
     }
     return validJWTFetch();
   };
-  console.log('App login:', login);
   useEffect(() => {
-    console.log('запрос на сервер проверки token');
     (async () => {
       const response = await tokenCheck();
-      console.log('ответ сервера проверка token');
       if (response) {
         setLogin(true);
         setCurrentUser(response);
@@ -254,21 +251,30 @@ export const App = () => {
               <Route
                 path='/signin'
                 element={
-                  <Login
-                    onLogin={onLogin}
-                    messageAcceptAuth={messageAcceptAuth}
-                    isAccept={isAccept}
-                  />
+                  login ? (
+                    <Navigate to='/movies' />
+                  ) : (
+                    <Login
+                      onLogin={onLogin}
+                      messageAcceptAuth={messageAcceptAuth}
+                      isAccept={isAccept}
+                    />
+                  )
                 }
               />
+
               <Route
                 path='/signup'
                 element={
-                  <Register
-                    onRegister={onRegister}
-                    messageAcceptAuth={messageAcceptAuth}
-                    isAccept={isAccept}
-                  />
+                  login ? (
+                    <Navigate to='/movies' />
+                  ) : (
+                    <Register
+                      onRegister={onRegister}
+                      messageAcceptAuth={messageAcceptAuth}
+                      isAccept={isAccept}
+                    />
+                  )
                 }
               />
               <Route path='*' element={<PageNotFound />} />
