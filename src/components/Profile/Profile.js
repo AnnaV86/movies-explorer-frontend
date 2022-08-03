@@ -92,7 +92,7 @@ export const Profile = ({
               defaultValue={userDataUpdate.email}
               className='profile__input profile__input_type_email'
               placeholder='email'
-              pattern='^[^ ]+@[^ ]+\.[a-z]{2}$'
+              pattern='^[^ ]+@[^ ]+\.[a-z]{2,3}$'
               required
               title='email'
               disabled={!edit}

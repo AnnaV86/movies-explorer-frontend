@@ -23,8 +23,6 @@ export const SearchForm = ({
     setMessageError(evt.target.validationMessage);
   };
 
-  console.log(value);
-
   const handleShort = () => {
     const valueNew = value.short === 'off' ? 'on' : 'off';
     setValue((prev) => ({ ...prev, short: valueNew }));

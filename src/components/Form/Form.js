@@ -112,7 +112,7 @@ export const Form = ({
               className={classErrorEmail}
               name='email'
               required
-              pattern='^[^ ]+@[^ ]+\.[a-z]{2}$'
+              pattern='^[^ ]+@[^ ]+\.[a-z]{2,3}$'
               value={userData.email}
               onChange={handleChange}
             />
