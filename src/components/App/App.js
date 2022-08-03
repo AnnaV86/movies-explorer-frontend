@@ -16,6 +16,7 @@ import {
   updateUserData,
   addSaveMovies,
   deleteSaveMovies,
+  getUserInfo,
 } from '../../utils/MainApi';
 import { signupFetch, signinFetch, validJWTFetch } from '../../utils/auth';
 import { CurrentMoviesSaveContext } from '../../contexts/CurrentMoviesSaveContext';
@@ -84,6 +85,8 @@ export const App = () => {
       localStorage.setItem('token', response.token);
       headers.authorization = `Bearer ${localStorage.getItem('token')}`;
       setLogin(true);
+      const user = await getUserInfo();
+      setCurrentUser(user);
       navigate('/movies');
     }
     if (response.message === UNAUTHORIZED_STATUS) {
