@@ -28,6 +28,9 @@ import {
   UPDATE_DATA_MESSAGE,
   DELETE_MOVIE_MESSAGE,
   ERROR_MOVIES_VALID_DATA_MESSAGE,
+  CONFLICT_ERROR_STATUS,
+  UNAUTHORIZED_STATUS,
+  BAD_REQUEST_STATUS,
 } from '../../constants';
 
 export const App = () => {
@@ -57,7 +60,7 @@ export const App = () => {
       }, 5000);
       return onLogin(userData);
     }
-    if (response.message === '409') {
+    if (response.message === CONFLICT_ERROR_STATUS) {
       setMessageAcceptAuth(CONFLICT_ERROR);
     } else {
       setMessageAcceptAuth(ERROR_SERVER_MESSAGE_SHORT);
@@ -83,7 +86,7 @@ export const App = () => {
       setLogin(true);
       navigate('/movies');
     }
-    if (response.message === '401') {
+    if (response.message === UNAUTHORIZED_STATUS) {
       setMessageAcceptAuth(ERROR_MESSAGE_EMAIL_PASSWORD);
       setIsAccept(false);
     } else {
@@ -113,7 +116,7 @@ export const App = () => {
       setIsAccept(false);
       setMessageAcceptAuth(UPDATE_DATA_MESSAGE);
       setCurrentUser(userDataNew);
-    } else if (response.message === '409') {
+    } else if (response.message === CONFLICT_ERROR_STATUS) {
       setIsAccept(false);
       setMessageAcceptAuth(CONFLICT_ERROR);
     } else {
@@ -155,7 +158,7 @@ export const App = () => {
     const response = await addSaveMovies(movieNew);
     if (response._id) {
       setCurrentMovies((prev) => [...prev, response]);
-    } else if (response.message === '400') {
+    } else if (response.message === BAD_REQUEST_STATUS) {
       setMessageAcceptAuth(ERROR_MOVIES_VALID_DATA_MESSAGE);
       setInfoTooltip(true);
     } else {

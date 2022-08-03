@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
 import { Header } from '../Header/Header';
+import { PATTERN_NAME, PATTERN_EMAIL } from '../../constants';
 
 export const Profile = ({
   onSignOut,
@@ -73,7 +74,7 @@ export const Profile = ({
               className='profile__input profile__input_type_name'
               placeholder='Имя'
               required
-              pattern='^[a-zA-ZА-Яа-яЁё\s]+$'
+              pattern={PATTERN_NAME}
               minLength={2}
               maxLength={100}
               title='Кириллица'
@@ -92,7 +93,7 @@ export const Profile = ({
               defaultValue={userDataUpdate.email}
               className='profile__input profile__input_type_email'
               placeholder='email'
-              pattern='^[^ ]+@[^ ]+\.[a-z]{2}$'
+              pattern={PATTERN_EMAIL}
               required
               title='email'
               disabled={!edit}

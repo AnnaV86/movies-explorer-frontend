@@ -2,20 +2,29 @@ import React, { useEffect, useState } from 'react';
 import './MoviesCardList.css';
 import { MoviesCard } from './components/MoviesCard/MoviesCard';
 import { More } from './components/More/More';
+import {
+  WIDTH_1279,
+  WIDTH_767,
+  NUMBER_OF_CARDS_OVER_1279,
+  NUMBER_OF_CARDS_OVER_767,
+  NUMBER_OF_CARDS_LESS_767,
+  ADD_NUMBER_CARD_3,
+  ADD_NUMBER_CARD_2,
+} from '../../constants';
 
 export const MoviesCardList = ({ arrayMovie, type, onClickButtonMovie }) => {
   const [counter, setCounter] = useState();
   const [moreCard, setMoreCard] = useState();
 
   const determiningCountCards = (width) => {
-    if (width > 1279) {
-      setCounter(12);
-      return setMoreCard(3);
-    } else if (width > 767) {
-      setCounter(8);
-      return setMoreCard(2);
-    } else setCounter(5);
-    return setMoreCard(2);
+    if (width > WIDTH_1279) {
+      setCounter(NUMBER_OF_CARDS_OVER_1279);
+      return setMoreCard(ADD_NUMBER_CARD_3);
+    } else if (width > WIDTH_767) {
+      setCounter(NUMBER_OF_CARDS_OVER_767);
+      return setMoreCard(ADD_NUMBER_CARD_2);
+    } else setCounter(NUMBER_OF_CARDS_LESS_767);
+    return setMoreCard(ADD_NUMBER_CARD_2);
   };
 
   useEffect(() => {
@@ -60,7 +69,10 @@ export const MoviesCardList = ({ arrayMovie, type, onClickButtonMovie }) => {
               );
             })}
       </ul>
-      {arrayMovie.length > counter && <More addCounter={addCounter} />}
+
+      {type === 'all' && arrayMovie.length > counter && (
+        <More addCounter={addCounter} />
+      )}
     </section>
   );
 };
