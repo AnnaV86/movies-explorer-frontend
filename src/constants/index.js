@@ -38,10 +38,6 @@ export const REGISTER_TITLE = 'Добро пожаловать!';
 export const REGISTER_BUTTON = 'Зарегистрироваться';
 export const REGISTER_TEXT = `Уже зарегистрированы? `;
 
-// Паттерны
-export const PATTERN_NAME = '^[A-Za-zА-Яа-яЁё /s -]+$';
-export const PATTERN_EMAIL = '^[^ ]+@[^ ]+.[a-z]{2}$';
-
 // Длительность короткометражки
 export const SHORT_MOVIE_TIME = 41;
 
@@ -53,5 +49,5 @@ export const WIDTH_767 = 767;
 export const NUMBER_OF_CARDS_OVER_1279 = 12;
 export const NUMBER_OF_CARDS_OVER_767 = 8;
 export const NUMBER_OF_CARDS_LESS_767 = 5;
-export const ADD_NUMBER_CARD_3 = 3
-export const ADD_NUMBER_CARD_2 = 2
+export const ADD_NUMBER_CARD_3 = 3;
+export const ADD_NUMBER_CARD_2 = 2;

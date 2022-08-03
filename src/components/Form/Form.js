@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import { PATTERN_NAME, PATTERN_EMAIL } from '../../constants';
+
 export const Form = ({
   title,
   type,
@@ -94,7 +94,7 @@ export const Form = ({
                 className={classErrorName}
                 name='name'
                 required
-                pattern={PATTERN_NAME}
+                pattern='^[A-Za-zА-Яа-яЁё /s -]+$'
                 minLength={2}
                 maxLength={30}
                 value={userData.name}
@@ -112,7 +112,7 @@ export const Form = ({
               className={classErrorEmail}
               name='email'
               required
-              pattern={PATTERN_EMAIL}
+              pattern='^[^ ]+@[^ ]+\.[a-z]{2}$'
               value={userData.email}
               onChange={handleChange}
             />
