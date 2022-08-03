@@ -6,6 +6,7 @@ export const SearchForm = ({
   onClickRequestArray,
   openPopupsMessage,
   type,
+  onClickShortMovie,
 }) => {
   const [value, setValue] = useState({ text: '', short: 'off' });
   const [tumbler, setTumbler] = useState(false);
@@ -22,13 +23,18 @@ export const SearchForm = ({
     setMessageError(evt.target.validationMessage);
   };
 
+  console.log(value);
+
   const handleShort = () => {
-    if (value)
-      setValue((prev) => ({
-        ...prev,
-        short: value.short === 'off' ? 'on' : 'off',
-      }));
+    const valueNew = value.short === 'off' ? 'on' : 'off';
+    setValue((prev) => ({ ...prev, short: valueNew }));
     setTumbler(!tumbler);
+    const searchText = localStorage.getItem('arrayAllMovies');
+    if (searchText) {
+      return onClickShortMovie(valueNew);
+    }
+
+    return;
   };
 
   const onClickSearch = () => {

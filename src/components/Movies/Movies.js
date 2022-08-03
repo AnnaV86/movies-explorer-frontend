@@ -31,6 +31,12 @@ export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
     return renderArray(arraySearch);
   };
 
+  const onClickShortMovie = (searchData) => {
+    localStorage.setItem('shortFilter', searchData);
+    const arraySearch = filterArray();
+    return renderArray(arraySearch);
+  };
+
   const renderArray = (array) => {
     if (array.length === 0) {
       openPopupsMessage(NOT_FOUND_MESSAGE);
@@ -61,6 +67,7 @@ export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
           onClickRequestArray={onClickRequestArray}
           openPopupsMessage={openPopupsMessage}
           type={'allMovies'}
+          onClickShortMovie={onClickShortMovie}
         />
         {preloaderOpen ? (
           <Preloader />

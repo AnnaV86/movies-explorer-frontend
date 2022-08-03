@@ -16,14 +16,21 @@ export const SavedMovies = ({
   const currentMovies = useContext(CurrentMoviesSaveContext);
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const [filteredArrayMovies, setFilteredArrayMovies] = useState(currentMovies);
+  const [searchText, setSearchText] = useState('');
 
   const onClickRequestArray = (searchData) => {
+    setSearchText(searchData.text.toLowerCase());
     setPreloaderOpen(true);
     const arraySearch = filterSaveArray(
       currentMovies,
       searchData.text.toLowerCase(),
       searchData.short
     );
+    return renderArray(arraySearch);
+  };
+
+  const onClickShortMovie = (searchData) => {
+    const arraySearch = filterSaveArray(currentMovies, searchText, searchData);
     return renderArray(arraySearch);
   };
 
@@ -38,6 +45,7 @@ export const SavedMovies = ({
 
   useEffect(() => {
     setFilteredArrayMovies(currentMovies);
+    return setSearchText('');
   }, [currentMovies]);
 
   return (
@@ -48,6 +56,7 @@ export const SavedMovies = ({
           onClickRequestArray={onClickRequestArray}
           openPopupsMessage={openPopupsMessage}
           type={'saveMovies'}
+          onClickShortMovie={onClickShortMovie}
         />
         {preloaderOpen ? (
           <Preloader />
