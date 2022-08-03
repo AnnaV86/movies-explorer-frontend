@@ -1,3 +1,4 @@
+import React from 'react';
 import { Promo } from './components/Promo/Promo';
 import { AboutProject } from './components/AboutProject/AboutProject';
 import './Main.css';
@@ -7,6 +8,7 @@ import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 
 export const Main = ({ login }) => {
+  console.log('я в Main');
   return (
     <>
       <Header login={login} />
@@ -20,3 +22,5 @@ export const Main = ({ login }) => {
     </>
   );
 };
+
+export default React.memo(Main);

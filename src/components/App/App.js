@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { Main } from '../Main/Main';
+import Main from '../Main/Main';
 import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../SavedMovies/SavedMovies';
 import { Profile } from '../Profile/Profile';
@@ -12,7 +12,6 @@ import { PageNotFound } from '../PageNotFound/PageNotFound';
 import { ProtectedRoute } from '../ProtectedRoute';
 import {
   headers,
-  getUserInfo,
   getMovies,
   updateUserData,
   addSaveMovies,
@@ -37,7 +36,7 @@ export const App = () => {
   const [currentMovies, setCurrentMovies] = useState([]);
   const [messageAcceptAuth, setMessageAcceptAuth] = useState('');
   const [isAccept, setIsAccept] = useState(true);
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const [isInfoTooltipOpen, setInfoTooltip] = useState(false);
   let messageClean;
 
@@ -68,15 +67,6 @@ export const App = () => {
       setIsAccept(true);
       setMessageAcceptAuth('');
     }, 5000);
-  };
-
-  // Проверка токена
-  const tokenCheck = () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return false;
-    }
-    return validJWTFetch();
   };
 
   // Авторизация (вход)
@@ -183,27 +173,33 @@ export const App = () => {
     setMessageAcceptAuth(message);
     setInfoTooltip(true);
   };
+
+  // Проверка токена
+  const tokenCheck = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return false;
+    }
+    return validJWTFetch();
+  };
+  console.log('App login:', login);
   useEffect(() => {
+    console.log('запрос на сервер проверки token');
     (async () => {
       const response = await tokenCheck();
+      console.log('ответ сервера проверка token');
       if (response) {
         setLogin(true);
+        setCurrentUser(response);
+        const cards = await getMovies();
+        setCurrentMovies(cards);
+      } else {
+        setLogin(false);
       }
     })();
-  }, [login, navigate]);
-
-  useEffect(() => {
-    if (login) {
-      (async () => {
-        const user = await getUserInfo();
-        const cards = await getMovies();
-        setCurrentUser(user);
-        setCurrentMovies(cards);
-      })();
-    }
-
     return clearTimeout(messageClean);
-  }, [login, messageClean]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setIsAccept(true);
@@ -236,6 +232,7 @@ export const App = () => {
                       login={login}
                       onClickDeleteMovie={onClickDeleteMovie}
                       openPopupsMessage={openPopupsMessage}
+                      currentMovies={currentMovies}
                     />
                   </ProtectedRoute>
                 }

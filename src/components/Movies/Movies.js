@@ -8,7 +8,9 @@ import { Header } from '../Header/Header';
 import { getMoviesListFetch } from '../../utils/MoviesApi';
 import { NOT_FOUND_MESSAGE, ERROR_SERVER_MESSAGE } from '../../constants/index';
 import { filterArray } from '../../utils/filterArray';
+
 export const Movies = ({ login, onClickSaveMovie, openPopupsMessage }) => {
+  console.log('я в Movies');
   const [preloaderOpen, setPreloaderOpen] = useState(false);
   const [filteredArrayMovies, setFilteredArrayMovies] = useState([]);
   const [isRender, setIsRender] = useState(true);
