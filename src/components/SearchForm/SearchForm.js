@@ -27,12 +27,7 @@ export const SearchForm = ({
     const valueNew = value.short === 'off' ? 'on' : 'off';
     setValue((prev) => ({ ...prev, short: valueNew }));
     setTumbler(!tumbler);
-    const searchText = localStorage.getItem('arrayAllMovies');
-    if (searchText) {
-      return onClickShortMovie(valueNew);
-    }
-
-    return;
+    return onClickShortMovie(valueNew);
   };
 
   const onClickSearch = () => {

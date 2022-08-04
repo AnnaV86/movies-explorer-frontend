@@ -86,6 +86,8 @@ export const App = () => {
       headers.authorization = `Bearer ${localStorage.getItem('token')}`;
       setLogin(true);
       const user = await getUserInfo();
+      const cards = await getMovies();
+      setCurrentMovies(cards);
       setCurrentUser(user);
       navigate('/movies');
     }
@@ -109,6 +111,8 @@ export const App = () => {
     localStorage.removeItem('searchText');
     localStorage.removeItem('shortFilter');
     setLogin(false);
+    setCurrentUser({});
+    setCurrentMovies([]);
   };
 
   // Редактирование профиля
