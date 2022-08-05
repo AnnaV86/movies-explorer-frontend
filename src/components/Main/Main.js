@@ -1,3 +1,4 @@
+import React from 'react';
 import { Promo } from './components/Promo/Promo';
 import { AboutProject } from './components/AboutProject/AboutProject';
 import './Main.css';
@@ -6,10 +7,10 @@ import { AboutMe } from './components/AboutMe/AboutMe';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 
-export const Main = () => {
+export const Main = ({ login }) => {
   return (
     <>
-      <Header />
+      <Header login={login} />
       <main className='content'>
         <Promo />
         <AboutProject />
@@ -20,3 +21,5 @@ export const Main = () => {
     </>
   );
 };
+
+export default React.memo(Main);

@@ -1,19 +1,30 @@
 import './Form.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import classNames from 'classnames';
-export const Form = ({ title, type, button, text }) => {
+
+export const Form = ({
+  title,
+  type,
+  button,
+  text,
+  onClick,
+  messageAccept,
+  isAccept,
+}) => {
   const [messageError, setMessageError] = useState({
     name: '',
     email: '',
     password: '',
   });
-  const [value, setValue] = useState({
+  const [userData, setUserData] = useState({
     name: '',
     email: '',
     password: '',
   });
+
+  const [isValidForm, setIsValidForm] = useState(false);
   const classErrorName = classNames(`form__input`, {
     error: messageError.name,
   });
@@ -23,15 +34,49 @@ export const Form = ({ title, type, button, text }) => {
   const classErrorPassword = classNames(`form__input`, {
     error: messageError.password,
   });
+  const classSaveButton = classNames(`form__button`, {
+    form__button_disable: !isValidForm,
+    'form__button_disable form__button_span-text': !isAccept,
+  });
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
-    setValue((prev) => ({ ...prev, [name]: value }));
+    setUserData((prev) => ({ ...prev, [name]: value }));
     setMessageError((prev) => ({
       ...prev,
       [name]: evt.target.validationMessage,
     }));
   };
+
+  const enterRegistration = (e) => {
+    if (type === 'signin' && (!userData.password || !userData.email)) {
+      return;
+    } else if (
+      type === 'signup' &&
+      (!userData.name || !userData.password || !userData.email)
+    ) {
+      return;
+    } else {
+      return onClick(userData);
+    }
+  };
+
+  useEffect(() => {
+    if (type === 'signup') {
+      if (messageError.name || messageError.email || messageError.password) {
+        return setIsValidForm(false);
+      } else if (!userData.name || !userData.password || !userData.email) {
+        return setIsValidForm(false);
+      }
+    } else if (type === 'signin') {
+      if (messageError.email || messageError.password) {
+        return setIsValidForm(false);
+      } else if (!userData.password || !userData.email) {
+        return setIsValidForm(false);
+      }
+    }
+    setIsValidForm(true);
+  }, [messageError, userData, type]);
 
   return (
     <section className='form-enter'>
@@ -51,8 +96,8 @@ export const Form = ({ title, type, button, text }) => {
                 required
                 pattern='^[A-Za-zА-Яа-яЁё /s -]+$'
                 minLength={2}
-                maxLength={100}
-                value={value.name}
+                maxLength={30}
+                value={userData.name}
                 onChange={handleChange}
               />
               {messageError.name && (
@@ -67,7 +112,8 @@ export const Form = ({ title, type, button, text }) => {
               className={classErrorEmail}
               name='email'
               required
-              value={value.email}
+              pattern='^[^ ]+@[^ ]+\.[a-z]{2,3}$'
+              value={userData.email}
               onChange={handleChange}
             />
             {messageError.email && (
@@ -80,7 +126,7 @@ export const Form = ({ title, type, button, text }) => {
               type='password'
               className={classErrorPassword}
               name='password'
-              value={value.password}
+              value={userData.password}
               required
               minLength={8}
               onChange={handleChange}
@@ -90,7 +136,15 @@ export const Form = ({ title, type, button, text }) => {
             )}
           </fieldset>
         </div>
-        <button type='submit' className='form__button'>{button}</button>
+        {!isAccept && <span className='form__error'>{messageAccept}</span>}
+        <button
+          type='button'
+          className={classSaveButton}
+          onClick={enterRegistration}
+          disabled={!isValidForm}
+        >
+          {button}
+        </button>
         <p className='form__text'>
           {text}
           {type === 'signup' ? (
