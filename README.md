@@ -2,4 +2,6 @@
 
 ### Домен с проектом:
 
-https://vidmovies.students.nomoredomains.xyz
+https://vidmovies.students.nomoredomains.xyz  * Виртуальная машина на данный момент отключена
+
+
